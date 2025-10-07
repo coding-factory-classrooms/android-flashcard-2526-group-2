@@ -7,4 +7,43 @@
     android:layout_height="match_parent"
     tools:context=".DifficultChoiceActivity">
 
+    <Button
+        android:id="@+id/easyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="Facile"
+        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
+        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
+        app:layout_constraintTop_toBottomOf="@+id/difficultTextView" />
+
+    <Button
+        android:id="@+id/mediumButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Moyen"
+        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
+        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
+        app:layout_constraintTop_toBottomOf="@+id/easyButton" />
+
+    <Button
+        android:id="@+id/impossibleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Impossible"
+        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
+        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
+        app:layout_constraintTop_toBottomOf="@+id/mediumButton" />
+
+    <TextView
+        android:id="@+id/difficultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="Choisissez votre difficulté"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

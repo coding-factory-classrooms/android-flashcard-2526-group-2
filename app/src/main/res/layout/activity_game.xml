@@ -7,4 +7,63 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
+    <ImageView
+        android:id="@+id/gameImageView"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/Les_simpsons" />
+
+    <TextView
+        android:id="@+id/gameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Mettre la question juste ici"
+        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
+        app:layout_constraintStart_toStartOf="@+id/gameImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gameImageView" />
+
+    <Button
+        android:id="@+id/gameButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Choix 1"
+        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
+        app:layout_constraintStart_toStartOf="@+id/gameImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gameTextView" />
+
+    <Button
+        android:id="@+id/gameButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Choix 2"
+        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
+        app:layout_constraintStart_toStartOf="@+id/gameImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gameButton1" />
+
+    <Button
+        android:id="@+id/gameButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Choix 3"
+        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
+        app:layout_constraintStart_toStartOf="@+id/gameImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gameButton2" />
+
+    <Button
+        android:id="@+id/gameValidButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Valider la réponse"
+        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
+        app:layout_constraintStart_toStartOf="@+id/gameImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gameButton3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
