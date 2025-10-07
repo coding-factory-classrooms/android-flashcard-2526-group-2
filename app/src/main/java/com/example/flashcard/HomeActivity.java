@@ -1,7 +1,9 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,5 +27,13 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         Log.d(TAG, "Hello Flashcard");
+
+        Button playButton= findViewById(R.id.playButton);
+        playButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, DifficultChoiceActivity.class);
+            startActivity(intent);
+        });
+
+
     }
 }

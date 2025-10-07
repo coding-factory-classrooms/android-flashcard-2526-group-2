@@ -11,11 +11,11 @@
         android:id="@+id/gameImageView"
         android:layout_width="350dp"
         android:layout_height="200dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Les_simpsons" />
+        app:srcCompat="@drawable/simpson_family" />
 
     <TextView
         android:id="@+id/gameTextView"
@@ -66,4 +66,14 @@
         app:layout_constraintEnd_toEndOf="@+id/gameImageView"
         app:layout_constraintStart_toStartOf="@+id/gameImageView"
         app:layout_constraintTop_toBottomOf="@+id/gameButton3" />
+
+    <TextView
+        android:id="@+id/difficultyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="difficulté :"
+        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
+        app:layout_constraintStart_toStartOf="@+id/gameImageView"
+        app:layout_constraintTop_toBottomOf="@+id/gameImageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
