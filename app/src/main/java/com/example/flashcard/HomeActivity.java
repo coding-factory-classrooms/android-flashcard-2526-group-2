@@ -2,7 +2,7 @@ package com.example.flashcard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -12,8 +12,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
-
-    public static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +24,17 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
-        Log.d(TAG, "Hello Flashcard");
+        // About button
+        Button aboutbutton = findViewById(R.id.aboutButton);
+        aboutbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AboutActivity.class);
+                startActivity(intent);
+            }
+
+        });
+
 
         Button playButton= findViewById(R.id.playButton);
         playButton.setOnClickListener(view -> {
