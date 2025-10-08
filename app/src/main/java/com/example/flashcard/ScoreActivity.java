@@ -1,6 +1,9 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +23,28 @@ public class ScoreActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Link with the ids
+        TextView DifficultyText = findViewById(R.id.DifficultyText);
+        TextView TextScore = findViewById(R.id.ScoreTextView);
+        TextView PercentageText = findViewById(R.id.PercentageText);
+
+        String difficulty = "";
+        int correctAnswers = 0;
+        int totalQuestions = 0;
+        float percentage = (float) correctAnswers / totalQuestions * 100f;
+
+        DifficultyText.setText(difficulty);
+        TextScore.setText(correctAnswers / totalQuestions);
+        PercentageText.setText(percentage + "");
+
+
+        Button homeButton= findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this,HomeActivity.class);
+            startActivity(intent);
+        });
+
+
     }
 }
