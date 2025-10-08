@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // About button
-        Button aboutbutton = findViewById(R.id.aboutButton);
+        ImageButton aboutbutton = findViewById(R.id.aboutButton);
         aboutbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        Button playButton= findViewById(R.id.playButton);
+        ImageButton playButton= findViewById(R.id.playButton);
         playButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, DifficultChoiceActivity.class);
             startActivity(intent);

@@ -78,4 +78,64 @@
         app:layout_constraintStart_toStartOf="@+id/gameImageView"
         app:layout_constraintTop_toBottomOf="@+id/choicesRadioGroup" />
 
+    <ImageButton
+        android:id="@+id/soundImageButton"
+        android:layout_width="36dp"
+        android:layout_height="37dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/gameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/gameTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gameTextView"
+        app:layout_constraintVertical_bias="0.441"
+        app:srcCompat="@drawable/sound_image" />
+
+    <ImageButton
+        android:id="@+id/soundQuestionButton1"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/choicesRadioGroup"
+        app:layout_constraintEnd_toStartOf="@+id/choicesRadioGroup"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTextView"
+        app:layout_constraintVertical_bias="0.284"
+        app:srcCompat="@drawable/sound_image" />
+
+    <ImageButton
+        android:id="@+id/soundQuestionButton2"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/choicesRadioGroup"
+        app:layout_constraintEnd_toStartOf="@+id/choicesRadioGroup"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTextView"
+        app:layout_constraintVertical_bias="0.642"
+        app:srcCompat="@drawable/sound_image" />
+
+    <ImageButton
+        android:id="@+id/soundQuestionButton3"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/choicesRadioGroup"
+        app:layout_constraintEnd_toStartOf="@+id/choicesRadioGroup"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTextView"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/sound_image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
