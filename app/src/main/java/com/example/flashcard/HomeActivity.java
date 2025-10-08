@@ -3,7 +3,6 @@ package com.example.flashcard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
+
+    public ImageButton titleImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,22 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //  Start la musique de fond avec le volume qu'on veut
+        AudioKit.startBgm(this, R.raw.theme_sound, true); // true pour jouer en bloucle
+        AudioKit.setBgmVolume(0.2f, 0.2f);
+
+        // Précharger les sfx, (conseillé)
+        AudioKit.preloadSfx(this, R.raw.hmmm_sound);
+        AudioKit.preloadSfx(this, R.raw.marge_toi_alors_sound);
+        AudioKit.preloadSfx(this, R.raw.ohpinaise_sound);
+        AudioKit.preloadSfx(this, R.raw.pas_baratin_sound);
+        AudioKit.preloadSfx(this, R.raw.ta_gueule_sound);
+        AudioKit.preloadSfx(this, R.raw.woohoo_sound);
+
+
+
+
 
         // About button
         ImageButton aboutbutton = findViewById(R.id.aboutButton);
@@ -43,6 +60,16 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AudioKit.pauseBgm();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AudioKit.resumeBgm();
     }
 }

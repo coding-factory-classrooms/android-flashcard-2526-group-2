@@ -14,6 +14,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
 
     private ImageButton holdSelectedButton;
     private float scaleEasyButtonX, scaleEasyButtonY;
+    public ImageButton titleImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +28,28 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         impossibleImageButton = findViewById(R.id.impossibleImageButton);
         validateImageButton   = findViewById(R.id.validateImageButton);
 
+        // Précharger les sfx, (conseillé)
+        AudioKit.preloadSfx(this, R.raw.hmmm_sound);
+        AudioKit.preloadSfx(this, R.raw.marge_toi_alors_sound);
+        AudioKit.preloadSfx(this, R.raw.ohpinaise_sound);
+        AudioKit.preloadSfx(this, R.raw.pas_baratin_sound);
+        AudioKit.preloadSfx(this, R.raw.ta_gueule_sound);
+        AudioKit.preloadSfx(this, R.raw.woohoo_sound);
+        AudioKit.preloadSfx(this, R.raw.donuts_sucre_au_sucre_sound);
+
+        titleImageButton= findViewById(R.id.titleImageButton);
+        titleImageButton.setOnClickListener(v -> AudioKit.playLongOnce(this, R.raw.donuts_sucre_au_sucre_sound));
+
+
         scaleEasyButtonX = easyImageButton.getScaleX();
         scaleEasyButtonY = easyImageButton.getScaleY();
 
-        easyImageButton.setOnClickListener(v -> { selectDifficulty("facile");    animeScaleButton(easyImageButton); });
-        mediumImageButton.setOnClickListener(v -> { selectDifficulty("moyen");   animeScaleButton(mediumImageButton); });
-        difficileImageButton.setOnClickListener(v -> { selectDifficulty("difficile"); animeScaleButton(difficileImageButton); });
-        hardcoreImageButton.setOnClickListener(v -> { selectDifficulty("hardcore");   animeScaleButton(hardcoreImageButton); });
-        impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleButton(impossibleImageButton); });
+        easyImageButton.setOnClickListener(v -> { selectDifficulty("facile");    animeScaleOnclickButton(easyImageButton); });
+        mediumImageButton.setOnClickListener(v -> { selectDifficulty("moyen");   animeScaleOnclickButton(mediumImageButton); });
+        difficileImageButton.setOnClickListener(v -> { selectDifficulty("difficile"); animeScaleOnclickButton(difficileImageButton); });
+        hardcoreImageButton.setOnClickListener(v -> { selectDifficulty("hardcore");   animeScaleOnclickButton(hardcoreImageButton); });
+        impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleOnclickButton(impossibleImageButton); });
+
 
         validateImageButton.setOnClickListener(v -> {
             if (difficulty == null) {
@@ -51,7 +66,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         difficulty = level;
     }
 
-    private void animeScaleButton(ImageButton button) {
+    private void animeScaleOnclickButton(ImageButton button) {
         if (holdSelectedButton == button) return;
 
         if (holdSelectedButton != null) {
@@ -64,4 +79,10 @@ public class DifficultChoiceActivity extends AppCompatActivity {
 
         holdSelectedButton = button;
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AudioKit.releaseAll();}
 }

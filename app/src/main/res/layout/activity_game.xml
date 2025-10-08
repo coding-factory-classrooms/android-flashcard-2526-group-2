@@ -8,75 +8,82 @@
     tools:context=".GameActivity">
 
     <ImageView
-        android:id="@+id/gameImageView"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/backgroundDifficultyImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/simpson_family" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/backgound3" />
 
     <TextView
         android:id="@+id/gameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#211A1818"
         android:text="Mettre la question juste ici"
-        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
-        app:layout_constraintStart_toStartOf="@+id/gameImageView"
-        app:layout_constraintTop_toBottomOf="@+id/gameImageView" />
+        android:textColor="#FFC107"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultyTextView" />
 
     <TextView
         android:id="@+id/difficultyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="44dp"
+        android:background="#211A1818"
         android:text="difficulté :"
-        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
-        app:layout_constraintStart_toStartOf="@+id/gameImageView"
-        app:layout_constraintTop_toBottomOf="@+id/gameImageView" />
+        android:textColor="#FFC107"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleImageButton" />
 
     <RadioGroup
         android:id="@+id/choicesRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/gameTextView"
-        app:layout_constraintStart_toStartOf="@+id/gameImageView"
-        app:layout_constraintEnd_toEndOf="@+id/gameImageView">
+        app:layout_constraintEnd_toEndOf="@+id/gameTextView"
+        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintStart_toStartOf="@+id/gameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/gameTextView">
 
         <RadioButton
             android:id="@+id/gameButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:text="Choix 1" />
+            android:background="#211A1818"
+            android:text="Choix 1"
+            android:textColor="#FFC107" />
 
         <RadioButton
             android:id="@+id/gameButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Choix 2" />
+            android:background="#211A1818"
+            android:text="Choix 2"
+            android:textColor="#FFC107" />
 
         <RadioButton
             android:id="@+id/gameButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Choix 3" />
+            android:background="#211A1818"
+            android:text="Choix 3"
+            android:textColor="#FFC107" />
     </RadioGroup>
-
-    <Button
-        android:id="@+id/gameValidButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Valider la réponse"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/gameImageView"
-        app:layout_constraintStart_toStartOf="@+id/gameImageView"
-        app:layout_constraintTop_toBottomOf="@+id/choicesRadioGroup" />
 
     <ImageButton
         android:id="@+id/soundImageButton"
@@ -137,5 +144,30 @@
         app:layout_constraintTop_toBottomOf="@+id/gameTextView"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/sound_image" />
+
+    <ImageButton
+        android:id="@+id/titleImageButton"
+        android:layout_width="408dp"
+        android:layout_height="215dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/choose_title" />
+
+    <ImageButton
+        android:id="@+id/gameValidButton"
+        android:layout_width="292dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choicesRadioGroup"
+        app:srcCompat="@drawable/validate_question_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

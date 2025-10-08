@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.flashcard.AudioKit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,10 +25,10 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     // UI
     private TextView difficultyTextView, questionTextView;
     private RadioGroup choicesRadioGroup;
-    private Button choice1, choice2, choice3, validateButton;
+    private Button choice1, choice2, choice3;
 
     // Boutons son
-    private ImageButton soundImageButton;       // lit la question
+    private ImageButton soundImageButton, validateButton; // lit la question + valide la question
     private ImageButton soundQuestionButton1;   // lit choix 1
     private ImageButton soundQuestionButton2;   // lit choix 2
     private ImageButton soundQuestionButton3;   // lit choix 3
@@ -40,10 +42,18 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private TextToSpeech tts;
     private boolean ttsReady = false;
 
+    private float answerCounter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        AudioKit.releaseAll();
+
+        //  Start la musique de fond avec le volume qu'on veut
+        AudioKit.startBgm(this, R.raw.horror_theme_sound, false); // true pour jouer en bloucle
+        AudioKit.setBgmVolume(0.2f, 0.2f);
 
         // --- TTS natif ---
         tts = new TextToSpeech(this, this);
@@ -52,8 +62,8 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         difficultyTextView   = findViewById(R.id.difficultyTextView);
         questionTextView     = findViewById(R.id.gameTextView);
         choicesRadioGroup    = findViewById(R.id.choicesRadioGroup);
-        choice1              = findViewById(R.id.gameButton2);
-        choice2              = findViewById(R.id.gameButton1);
+        choice1              = findViewById(R.id.gameButton1);
+        choice2              = findViewById(R.id.gameButton2);
         choice3              = findViewById(R.id.gameButton3);
         validateButton       = findViewById(R.id.gameValidButton);
 
@@ -62,15 +72,17 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         soundQuestionButton2 = findViewById(R.id.soundQuestionButton2);
         soundQuestionButton3 = findViewById(R.id.soundQuestionButton3);
 
+        answerCounter = 0f;
+
         // --- Actions boutons son (KISS) ---
         soundImageButton.setOnClickListener(v ->
                 speak(getTextOrEmpty(questionTextView))
         );
         soundQuestionButton1.setOnClickListener(v ->
-                speak(getTextOrEmpty(choice2))
+                speak(getTextOrEmpty(choice1))
         );
         soundQuestionButton2.setOnClickListener(v ->
-                speak(getTextOrEmpty(choice1))
+                speak(getTextOrEmpty(choice2))
         );
         soundQuestionButton3.setOnClickListener(v ->
                 speak(getTextOrEmpty(choice3))
@@ -94,9 +106,36 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         validateButton.setOnClickListener(v -> checkAnswer());
 
         // Sélection de réponse (si tu utilises des Buttons pour afficher les choix)
-        choice1.setOnClickListener(v -> selectedAnswer = choice1.getText().toString());
-        choice2.setOnClickListener(v -> selectedAnswer = choice2.getText().toString());
-        choice3.setOnClickListener(v -> selectedAnswer = choice3.getText().toString());
+        choice1.setOnClickListener(v ->{
+            if (answerCounter >= 3f){
+                AudioKit.playSfx(this, R.raw.ta_gueule_sound);
+                selectedAnswer = choice1.getText().toString();
+            } else {
+                selectedAnswer = choice1.getText().toString();
+                answerCounter += 1f;
+            }
+        });
+        choice2.setOnClickListener(v ->{
+            if (answerCounter >= 3f){
+                AudioKit.playSfx(this, R.raw.ta_gueule_sound);
+                selectedAnswer = choice2.getText().toString();
+            } else {
+                selectedAnswer = choice2.getText().toString();
+                answerCounter += 1f;
+            }
+        });
+        choice3.setOnClickListener(v ->{
+            if (answerCounter >= 3f){
+                AudioKit.playSfx(this, R.raw.ta_gueule_sound);
+                selectedAnswer = choice3.getText().toString();
+            } else {
+                selectedAnswer = choice3.getText().toString();
+                answerCounter += 1f;
+            }
+        });
+
+        setupHoverScale(validateButton, 1.2f);
+
     }
 
     // Affiche la question et remet l'état des choix
@@ -122,13 +161,18 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     // Vérifie la réponse, toasts + passe à la suivante
     private void checkAnswer() {
+
+
+
         String[] q = questions.get(currentQuestionIndex);
         if (selectedAnswer.equals(q[4])) {
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
-            speak("Bonne réponse");
+            AudioKit.playLongOnce(this, R.raw.woohoo_sound);
+            answerCounter = 0f;
         } else {
             Toast.makeText(this, "Mauvaise réponse ! La bonne réponse était : " + q[4], Toast.LENGTH_LONG).show();
-            speak("Mauvaise réponse");
+            AudioKit.playLongOnce(this, R.raw.ohpinaise_sound);
+            answerCounter = 0f;
         }
         choicesRadioGroup.clearCheck();
 
@@ -142,6 +186,10 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             }
         }, 500);
     }
+
+
+
+
 
     /* ====== TextToSpeech ====== */
 
@@ -182,4 +230,30 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             try { tts.shutdown(); } catch (Exception ignored) {}
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AudioKit.releaseAll();
+        tts.stop();
+    }
+    private void setupHoverScale(ImageButton btn, float scaleUp) {
+        final float baseX = btn.getScaleX();
+        final float baseY = btn.getScaleY();
+
+        btn.setOnHoverListener((v, e) -> {
+            switch (e.getActionMasked()) {
+                case MotionEvent.ACTION_HOVER_ENTER:
+                    v.setScaleX(baseX * scaleUp);
+                    v.setScaleY(baseY * scaleUp);
+                    break;
+                case MotionEvent.ACTION_HOVER_EXIT:
+                    v.setScaleX(baseX);
+                    v.setScaleY(baseY);
+                    break;
+            }
+            return false; // laisse passer l’événement aux autres handlers
+        });
+    }
+
 }
