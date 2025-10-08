@@ -26,25 +26,28 @@ public class ScoreActivity extends AppCompatActivity {
 
         // Link with the ids
         TextView DifficultyText = findViewById(R.id.DifficultyText);
-        TextView TextScore = findViewById(R.id.ScoreTextView);
+        TextView TextScore = findViewById(R.id.TextScore);
         TextView PercentageText = findViewById(R.id.PercentageText);
 
-        String difficulty = "";
-        int correctAnswers = 0;
-        int totalQuestions = 0;
-        float percentage = (float) correctAnswers / totalQuestions * 100f;
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra("difficulty");
+        int goodAnswers = intent.getIntExtra("goodAnswers", 0);
+
+        int totalQuestions = Question.getQuestions(difficulty).size();
+        float percentage = ((float) goodAnswers / totalQuestions) * 100f;
 
         DifficultyText.setText(difficulty);
-        TextScore.setText(correctAnswers / totalQuestions);
-        PercentageText.setText(percentage + "");
+        TextScore.setText( goodAnswers + "/" + totalQuestions);
+        PercentageText.setText(Math.round(percentage) + "%");
 
-
-        Button homeButton= findViewById(R.id.homeButton);
+        Button homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(view -> {
-            Intent intent = new Intent(this,HomeActivity.class);
-            startActivity(intent);
+            Intent HomeIntent = new Intent(this,HomeActivity.class);
+            startActivity(HomeIntent);
         });
 
 
     }
+
+
 }

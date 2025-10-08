@@ -20,6 +20,9 @@ public class GameActivity extends AppCompatActivity {
     private List<String[]> questions;
     private int currentQuestionIndex = 0;
     private String selectedAnswer = "";
+    private int goodAnswer = 0;
+
+    private String currentDifficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        String currentDifficulty = intent.getStringExtra("difficulty");
+        currentDifficulty = intent.getStringExtra("difficulty");
         difficultyTextView.setText(currentDifficulty != null ? currentDifficulty : "Aucune difficulté");
 
         questions = Question.getQuestions(currentDifficulty);
@@ -84,6 +87,7 @@ public class GameActivity extends AppCompatActivity {
 
         if (selectedAnswer.equals(q[4])) {
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
+            goodAnswer += 1;
         } else {
             Toast.makeText(this, "Mauvaise réponse ! La réponse était : " + q[4], Toast.LENGTH_LONG).show();
         }
@@ -96,6 +100,10 @@ public class GameActivity extends AppCompatActivity {
             if (currentQuestionIndex < questions.size()) {
                 showQuestion(currentQuestionIndex);
             } else {
+                Intent intent = new Intent(this, ScoreActivity.class);
+                intent.putExtra("goodAnswers", goodAnswer);
+                intent.putExtra("difficulty", currentDifficulty);
+                startActivity(intent);
                 finish();
             }
         }, 500);
