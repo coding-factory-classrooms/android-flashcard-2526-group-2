@@ -11,13 +11,13 @@
         android:id="@+id/aboutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="280dp"
+        android:layout_marginEnd="380dp"
         android:fontFamily="@font/luckiest_guy"
         android:text="A Propos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.98" />
 
     <TextView
         android:id="@+id/titleTextView"
@@ -92,20 +92,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.161"
         app:srcCompat="@drawable/the_simpsons___homer_simpson_s_donut__d_ohnuts__by_porshacrystal12_dhtsy3a" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="105dp"
-        android:layout_height="111dp"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:scrollbarSize="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
