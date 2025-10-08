@@ -11,7 +11,7 @@
         android:id="@+id/easyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="120dp"
         android:text="Facile"
         app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
         app:layout_constraintStart_toStartOf="@+id/difficultTextView"
@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="Valider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
+        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
         app:layout_constraintTop_toBottomOf="@+id/impossibleButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
