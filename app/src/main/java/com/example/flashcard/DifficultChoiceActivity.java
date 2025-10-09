@@ -2,7 +2,7 @@ package com.example.flashcard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,25 +10,48 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DifficultChoiceActivity extends AppCompatActivity {
 
     private String difficulty;
-    private Button easyButton, mediumButton, impossibleButton, validateButton;
+    private ImageButton easyImageButton, mediumImageButton, difficileImageButton, hardcoreImageButton, impossibleImageButton, validateImageButton;
+
+    private ImageButton holdSelectedButton;
+    private float scaleEasyButtonX, scaleEasyButtonY;
+    public ImageButton titleImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficult_choice);
 
-        easyButton = findViewById(R.id.easyButton);
-        mediumButton = findViewById(R.id.mediumButton);
-        impossibleButton = findViewById(R.id.impossibleButton);
-        validateButton = findViewById(R.id.validateButton);
-        validateButton.setEnabled(false);
+        easyImageButton       = findViewById(R.id.easyImageButton);
+        mediumImageButton     = findViewById(R.id.mediumImageButton);
+        difficileImageButton  = findViewById(R.id.difficileImageButton);
+        hardcoreImageButton   = findViewById(R.id.hardcoreImageButton);
+        impossibleImageButton = findViewById(R.id.impossibleImageButton);
+        validateImageButton   = findViewById(R.id.validateImageButton);
 
-        easyButton.setOnClickListener(v -> selectDifficulty("facile"));
-        mediumButton.setOnClickListener(v -> selectDifficulty("moyen"));
-        impossibleButton.setOnClickListener(v -> selectDifficulty("impossible"));
+        // Précharger les sfx, (conseillé)
+        AudioKit.preloadSfx(this, R.raw.hmmm_sound);
+        AudioKit.preloadSfx(this, R.raw.marge_toi_alors_sound);
+        AudioKit.preloadSfx(this, R.raw.ohpinaise_sound);
+        AudioKit.preloadSfx(this, R.raw.pas_baratin_sound);
+        AudioKit.preloadSfx(this, R.raw.ta_gueule_sound);
+        AudioKit.preloadSfx(this, R.raw.woohoo_sound);
+        AudioKit.preloadSfx(this, R.raw.donuts_sucre_au_sucre_sound);
 
-        // Validation
-        validateButton.setOnClickListener(v -> {
+        titleImageButton= findViewById(R.id.titleImageButton);
+        titleImageButton.setOnClickListener(v -> AudioKit.playLongOnce(this, R.raw.donuts_sucre_au_sucre_sound));
+
+
+        scaleEasyButtonX = easyImageButton.getScaleX();
+        scaleEasyButtonY = easyImageButton.getScaleY();
+
+        easyImageButton.setOnClickListener(v -> { selectDifficulty("facile");    animeScaleOnclickButton(easyImageButton); });
+        mediumImageButton.setOnClickListener(v -> { selectDifficulty("moyen");   animeScaleOnclickButton(mediumImageButton); });
+        difficileImageButton.setOnClickListener(v -> { selectDifficulty("difficile"); animeScaleOnclickButton(difficileImageButton); });
+        hardcoreImageButton.setOnClickListener(v -> { selectDifficulty("hardcore");   animeScaleOnclickButton(hardcoreImageButton); });
+        impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleOnclickButton(impossibleImageButton); });
+
+
+        validateImageButton.setOnClickListener(v -> {
             if (difficulty == null) {
                 Toast.makeText(this, "Choisis une difficulté.", Toast.LENGTH_SHORT).show();
                 return;
@@ -41,6 +64,25 @@ public class DifficultChoiceActivity extends AppCompatActivity {
 
     private void selectDifficulty(String level) {
         difficulty = level;
-        validateButton.setEnabled(true);
     }
+
+    private void animeScaleOnclickButton(ImageButton button) {
+        if (holdSelectedButton == button) return;
+
+        if (holdSelectedButton != null) {
+            holdSelectedButton.setScaleX(scaleEasyButtonX);
+            holdSelectedButton.setScaleY(scaleEasyButtonY);
+        }
+
+        button.setScaleX(scaleEasyButtonX * 1.2f);
+        button.setScaleY(scaleEasyButtonY * 1.2f);
+
+        holdSelectedButton = button;
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AudioKit.releaseAll();}
 }

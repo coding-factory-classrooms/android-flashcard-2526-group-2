@@ -2,8 +2,8 @@ package com.example.flashcard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
 
-    public static final String TAG = "MainActivity";
+    public ImageButton titleImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +26,50 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
-        Log.d(TAG, "Hello Flashcard");
+        //  Start la musique de fond avec le volume qu'on veut
+        AudioKit.startBgm(this, R.raw.theme_sound, true); // true pour jouer en bloucle
+        AudioKit.setBgmVolume(0.2f, 0.2f);
 
-        Button playButton= findViewById(R.id.playButton);
+        // Précharger les sfx, (conseillé)
+        AudioKit.preloadSfx(this, R.raw.hmmm_sound);
+        AudioKit.preloadSfx(this, R.raw.marge_toi_alors_sound);
+        AudioKit.preloadSfx(this, R.raw.ohpinaise_sound);
+        AudioKit.preloadSfx(this, R.raw.pas_baratin_sound);
+        AudioKit.preloadSfx(this, R.raw.ta_gueule_sound);
+        AudioKit.preloadSfx(this, R.raw.woohoo_sound);
+
+
+
+
+
+        // About button
+        ImageButton aboutbutton = findViewById(R.id.aboutButton);
+        aboutbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AboutActivity.class);
+                startActivity(intent);
+            }
+
+        });
+
+
+        ImageButton playButton= findViewById(R.id.playButton);
         playButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, DifficultChoiceActivity.class);
             startActivity(intent);
         });
 
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AudioKit.pauseBgm();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AudioKit.resumeBgm();
     }
 }

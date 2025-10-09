@@ -5,56 +5,113 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#003C3434"
     tools:context=".DifficultChoiceActivity">
 
-    <Button
-        android:id="@+id/easyButton"
+    <ImageView
+        android:id="@+id/backgroundDifficultyImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="Facile"
-        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
-        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
-        app:layout_constraintTop_toBottomOf="@+id/difficultTextView" />
+        android:background="#00FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/background_dificulty" />
 
-    <Button
-        android:id="@+id/mediumButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Moyen"
-        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
-        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
-        app:layout_constraintTop_toBottomOf="@+id/easyButton" />
+    <ImageButton
+        android:id="@+id/mediumImageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/easyImageButton"
+        app:srcCompat="@drawable/difficulty_moyen_image" />
 
-    <Button
-        android:id="@+id/impossibleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Impossible"
-        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
-        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
-        app:layout_constraintTop_toBottomOf="@+id/mediumButton" />
 
-    <TextView
-        android:id="@+id/difficultTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:text="Choisissez votre difficulté"
+    <ImageButton
+        android:id="@+id/difficileImageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="144dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/easyImageButton"
+        app:srcCompat="@drawable/difficulty_difficile_image" />
+
+    <ImageButton
+        android:id="@+id/easyImageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="256dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.231"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backgroundDifficultyImageView"
+        app:srcCompat="@drawable/difficulty_easy_image" />
+
+    <ImageButton
+        android:id="@+id/impossibleImageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="112dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/difficileImageButton"
+        app:srcCompat="@drawable/difficulty_impossible_image" />
 
-    <Button
-        android:id="@+id/validateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Valider"
+    <ImageButton
+        android:id="@+id/hardcoreImageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/difficileImageButton"
+        app:srcCompat="@drawable/difficulty_hardcore_image" />
+
+    <ImageButton
+        android:id="@+id/validateImageButton"
+        android:layout_width="176dp"
+        android:layout_height="105dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00DBC2C2"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/difficultTextView"
-        app:layout_constraintStart_toStartOf="@+id/difficultTextView"
-        app:layout_constraintTop_toBottomOf="@+id/impossibleButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.987"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/validate_button" />
+
+    <ImageButton
+        android:id="@+id/titleImageButton"
+        android:layout_width="406dp"
+        android:layout_height="251dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/difficulty_texte"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

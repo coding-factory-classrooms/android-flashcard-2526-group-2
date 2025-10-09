@@ -7,48 +7,63 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <Button
-        android:id="@+id/aboutButton"
+    <ImageView
+        android:id="@+id/acceuilImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="A Propos"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/titleTextView"
-        app:layout_constraintStart_toStartOf="@+id/titleTextView" />
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/acceuil_background"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:text="Simpson Quizz"
-        android:textSize="50sp"
+
+    <ImageButton
+        android:id="@+id/playButton"
+        android:layout_width="173dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:srcCompat="@drawable/game_button" />
 
-    <Button
-        android:id="@+id/playButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:text="Jouer"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/titleTextView"
-        app:layout_constraintStart_toStartOf="@+id/titleTextView"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
-
-    <Button
+    <ImageButton
         android:id="@+id/questionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Question"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/titleTextView"
-        app:layout_constraintStart_toStartOf="@+id/titleTextView"
-        app:layout_constraintTop_toBottomOf="@+id/playButton" />
+        android:layout_width="173dp"
+        android:layout_height="171dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playButton"
+        app:srcCompat="@drawable/question_image" />
+
+    <ImageButton
+        android:id="@+id/aboutButton"
+        android:layout_width="155dp"
+        android:layout_height="138dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionButton"
+        app:srcCompat="@drawable/about_button" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="407dp"
+        android:layout_height="230dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/home_title"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
