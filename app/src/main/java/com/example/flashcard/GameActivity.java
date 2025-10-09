@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private TextToSpeech tts;
     private boolean ttsReady = false;
 
-    private float answerCounter;
+    private int answerCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         soundQuestionButton2 = findViewById(R.id.soundQuestionButton2);
         soundQuestionButton3 = findViewById(R.id.soundQuestionButton3);
 
-        answerCounter = 0f;
+        answerCounter = 0;
 
         // --- Actions boutons son (KISS) ---
         soundImageButton.setOnClickListener(v ->
@@ -168,11 +168,11 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         if (selectedAnswer.equals(q[4])) {
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
             AudioKit.playLongOnce(this, R.raw.woohoo_sound);
-            answerCounter = 0f;
+            answerCounter = 0;
         } else {
             Toast.makeText(this, "Mauvaise réponse ! La bonne réponse était : " + q[4], Toast.LENGTH_LONG).show();
             AudioKit.playLongOnce(this, R.raw.ohpinaise_sound);
-            answerCounter = 0f;
+            answerCounter = 0;
         }
         choicesRadioGroup.clearCheck();
 
