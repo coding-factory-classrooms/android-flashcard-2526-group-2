@@ -30,6 +30,7 @@ public class ScoreActivity extends AppCompatActivity {
         TextView TextScore = findViewById(R.id.TextScore);
         TextView PercentageText = findViewById(R.id.PercentageText);
 
+        // Link with GameActivity
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra("difficulty");
         int goodAnswers = intent.getIntExtra("goodAnswers", 0);
