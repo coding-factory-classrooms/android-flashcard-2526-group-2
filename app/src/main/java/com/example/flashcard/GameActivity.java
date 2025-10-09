@@ -37,7 +37,9 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private List<String[]> questions;
     private int currentQuestionIndex = 0;
     private String selectedAnswer = "";
+    private int goodAnswers = 0;
 
+    private String currentDifficulty;
     // TTS
     private TextToSpeech tts;
     private boolean ttsReady = false;
@@ -95,7 +97,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         });
 
         Intent intent = getIntent();
-        String currentDifficulty = intent.getStringExtra("difficulty");
+        currentDifficulty = intent.getStringExtra("difficulty");
         difficultyTextView.setText(currentDifficulty != null ? currentDifficulty : "Aucune difficulté");
 
         // Charge et mélange les questions
@@ -167,6 +169,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         String[] q = questions.get(currentQuestionIndex);
         if (selectedAnswer.equals(q[4])) {
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
+            goodAnswers +=1;
             AudioKit.playLongOnce(this, R.raw.woohoo_sound);
             answerCounter = 0;
         } else {
@@ -181,7 +184,10 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             if (currentQuestionIndex < questions.size()) {
                 showQuestion(currentQuestionIndex);
             } else {
-                speak("Quiz terminé");
+                Intent intent = new Intent(this, ScoreActivity.class);
+                intent.putExtra("goodAnswers", goodAnswers);
+                intent.putExtra("difficulty", currentDifficulty);
+                startActivity(intent);
                 finish();
             }
         }, 500);
