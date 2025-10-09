@@ -23,7 +23,7 @@ import java.util.UUID;
 public class GameActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     // UI
-    private TextView difficultyTextView, questionTextView;
+    private TextView difficultyTextView, questionTextView, indexTextView;
     private RadioGroup choicesRadioGroup;
     private Button choice1, choice2, choice3;
 
@@ -63,6 +63,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         // --- Liaisons XML ---
         difficultyTextView   = findViewById(R.id.difficultyTextView);
         questionTextView     = findViewById(R.id.gameTextView);
+        indexTextView        = findViewById(R.id.indexTextView);
         choicesRadioGroup    = findViewById(R.id.choicesRadioGroup);
         choice1              = findViewById(R.id.gameButton1);
         choice2              = findViewById(R.id.gameButton2);
@@ -156,6 +157,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         choicesRadioGroup.clearCheck();
         validateButton.setEnabled(false);
         selectedAnswer = "";
+        indexTextView.setText("Question " + (index + 1) + " / " + questions.size());
 
         // Optionnel : lire automatiquement l’énoncé
         // speak(q[0]);

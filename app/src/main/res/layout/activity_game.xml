@@ -24,26 +24,29 @@
 
     <TextView
         android:id="@+id/gameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="164dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="25dp"
         android:background="#211A1818"
+        android:fontFamily="@font/simpsonfont"
         android:text="Mettre la question juste ici"
         android:textColor="#FFC107"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/difficultyTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/indexTextView" />
 
     <TextView
         android:id="@+id/difficultyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:background="#211A1818"
+        android:fontFamily="@font/simpsonfont"
         android:text="difficulté :"
         android:textColor="#FFC107"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/titleImageButton"
+        app:layout_constraintStart_toStartOf="@+id/titleImageButton"
         app:layout_constraintTop_toBottomOf="@+id/titleImageButton" />
 
     <RadioGroup
@@ -63,8 +66,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:background="#211A1818"
+            android:fontFamily="@font/simpsonfont"
             android:text="Choix 1"
-            android:textColor="#FFC107" />
+            android:textColor="#FFC107"
+            android:textColorLink="#D56CE7"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/gameButton2"
@@ -72,8 +78,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#211A1818"
+            android:fontFamily="@font/simpsonfont"
             android:text="Choix 2"
-            android:textColor="#FFC107" />
+            android:textColor="#FFC107"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/gameButton3"
@@ -81,8 +89,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#211A1818"
+            android:fontFamily="@font/simpsonfont"
             android:text="Choix 3"
-            android:textColor="#FFC107" />
+            android:textColor="#FFC107"
+            android:textSize="18sp" />
     </RadioGroup>
 
     <ImageButton
@@ -169,5 +179,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choicesRadioGroup"
         app:srcCompat="@drawable/validate_question_button" />
+
+    <TextView
+        android:id="@+id/indexTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/simpsonfont"
+        android:text="index"
+        android:textColor="#FFC107"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/difficultyTextView"
+        app:layout_constraintStart_toStartOf="@+id/difficultyTextView"
+        app:layout_constraintTop_toBottomOf="@+id/difficultyTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
