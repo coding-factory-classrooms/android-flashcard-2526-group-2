@@ -65,7 +65,7 @@ public class ScoreActivity extends AppCompatActivity {
         shareButton.setOnClickListener(view -> {
 
             String shareText = "J'ai eu " + goodAnswers + "/" + totalQuestions +
-                    " avec un score de :" + percentageInt + "%. " + "en "+ difficulty ;
+                    " avec un score de : " + percentageInt + " % " + "en "+ difficulty ;
 
             // action share
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
