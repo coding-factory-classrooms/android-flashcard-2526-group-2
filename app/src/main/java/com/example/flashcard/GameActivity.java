@@ -26,29 +26,29 @@ import java.util.UUID;
 public class GameActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     // UI
-    private TextView difficultyTextView, questionTextView, indexTextView;
+    private TextView difficultyTextView, questionTextView, indexTextView, counterTextView;
     private RadioGroup choicesRadioGroup;
     private Button choice1, choice2, choice3;
-
     // Boutons son
     private ImageButton soundImageButton, validateButton; // lit la question + valide la question
     private ImageButton soundQuestionButton1;   // lit choix 1
     private ImageButton soundQuestionButton2;   // lit choix 2
     private ImageButton soundQuestionButton3;   // lit choix 3
-
     // Données quiz
     private List<String[]> questions;
     private int currentQuestionIndex = 0;
     private String selectedAnswer = "";
     private int goodAnswers = 0;
-
     private String currentDifficulty;
     // TTS
     private TextToSpeech tts;
     private boolean ttsReady = false;
-
     private int answerCounter;
     private float goodAnswer = 0f;
+    private Runnable timerRunnable;
+    private Handler timerHandler = new Handler();
+    private boolean hasAnswered = false;
+    private int timeLeft = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         difficultyTextView   = findViewById(R.id.difficultyTextView);
         questionTextView     = findViewById(R.id.gameTextView);
         indexTextView        = findViewById(R.id.indexTextView);
+        counterTextView      = findViewById(R.id.counterTextView);
         choicesRadioGroup    = findViewById(R.id.choicesRadioGroup);
         choice1              = findViewById(R.id.gameButton1);
         choice2              = findViewById(R.id.gameButton2);
@@ -202,6 +203,31 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 choice2.setClickable(true);
                 choice3.setClickable(true);
             }, 3000);//delais ici 3 sec
+
+
+            hasAnswered = false;
+
+            if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
+
+            timeLeft = 10;
+            counterTextView.setText(timeLeft + "s");
+
+            timerRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        counterTextView.setText(timeLeft + "s");
+                        timerHandler.postDelayed(this, 1000);
+                    } else {
+                        if (!hasAnswered) {
+                            checkAnswer();
+                        }
+                    }
+                }
+            };
+
+            timerHandler.postDelayed(timerRunnable, 1000);
         }
 
         // Optionnel : lire automatiquement l’énoncé

@@ -41,12 +41,13 @@
         android:id="@+id/difficultyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:background="#211A1818"
         android:fontFamily="@font/simpsonfont"
-        android:text="difficulté :"
+        android:text="difficulte"
         android:textColor="#FFC107"
-        app:layout_constraintEnd_toEndOf="@+id/titleImageButton"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/titleImageButton"
         app:layout_constraintTop_toBottomOf="@+id/titleImageButton" />
 
@@ -54,7 +55,7 @@
         android:id="@+id/choicesRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="3dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@+id/gameTextView"
         app:layout_constraintHorizontal_bias="0.408"
@@ -185,13 +186,26 @@
         android:id="@+id/indexTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/simpsonfont"
         android:text="index"
         android:textColor="#FFC107"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/difficultyTextView"
-        app:layout_constraintStart_toStartOf="@+id/difficultyTextView"
-        app:layout_constraintTop_toBottomOf="@+id/difficultyTextView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleImageButton" />
+
+    <TextView
+        android:id="@+id/counterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/simpsonfont"
+        android:text="counter"
+        android:textColor="#FFC107"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
