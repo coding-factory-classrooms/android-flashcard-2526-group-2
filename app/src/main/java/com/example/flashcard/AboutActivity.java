@@ -21,6 +21,8 @@ public class AboutActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_about);
 
+        AudioKit.startBgm(this, R.raw.spider_cochon, true);
+
         // --- Récupération et affichage de la version ---
         TextView textVersion = findViewById(R.id.text_version);
         String versionName = "N/A";
@@ -54,7 +56,10 @@ public class AboutActivity extends AppCompatActivity {
 
         buttonBack.setOnClickListener(v -> {
             // Ferme simplement cette activité pour revenir à la précédente
+            AudioKit.releaseAll();
             finish();
         });
+
+
     }
 }

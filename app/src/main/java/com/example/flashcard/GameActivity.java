@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -42,14 +41,15 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private TextToSpeech tts;
     private boolean ttsReady = false;
 
-    // Timer
+    // Timer (uniquement pour "Impossible")
     private final Handler timerHandler = new Handler();
     private Runnable timerRunnable;
     private int timeLeft = 10;
     private boolean hasAnswered = false;
-
-    // Alarme
     private boolean alarmActive = false;
+
+    // Compteur de clics sur les choix
+    private int clickCountChoices = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +95,22 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         choicesRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId != -1) {
                 validateButton.setEnabled(true);
-                // mémoriser la réponse choisie
                 RadioButton rb = findViewById(checkedId);
                 if (rb != null) selectedAnswer = rb.getText().toString();
             }
         });
         validateButton.setOnClickListener(v -> checkAnswer());
+
+        // Clics sur les choix → compteur + son après 3 clics
+        View.OnClickListener choicesClickCounter = v -> {
+            clickCountChoices++;
+            if (clickCountChoices > 3) {
+                AudioKit.playSfx(this, R.raw.ta_gueule_sound);
+            }
+        };
+        choice1.setOnClickListener(choicesClickCounter);
+        choice2.setOnClickListener(choicesClickCounter);
+        choice3.setOnClickListener(choicesClickCounter);
 
         // Init questions
         Intent intent = getIntent();
@@ -122,7 +132,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 GameActivity.this, R.anim.pulse_overlay));
         alarmBeam.startAnimation(android.view.animation.AnimationUtils.loadAnimation(
                 GameActivity.this, R.anim.rotate_beam));
-        // Son d'alarme (une fois au déclenchement KISS)
+        // son en boucle pendant l’alarme
         AudioKit.startBgm(this, R.raw.alarm_sound, true);
     }
 
@@ -137,7 +147,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         AudioKit.stopBgm();
     }
 
-    // Affiche la question et (re)lance le timer
+    // Affiche la question et (re)lance le timer uniquement pour "Impossible"
     private void showQuestion(int index) {
         String[] q = questions.get(index);
         String[] choices = { q[1], q[2], q[3] };
@@ -155,14 +165,22 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         selectedAnswer = "";
         hasAnswered = false;
 
-        // reset alarme + timer
+        // reset compteur de clics sur les choix
+        clickCountChoices = 0;
+
+        // Stoppe toute alarme/timer résiduels
         stopAlarm();
         if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
-        timeLeft = 10;
-        counterTextView.setText(timeLeft + "s");
 
-        // Mode "Impossible" : cache icônes après 3s (inchangé chez toi)
+        // === Timer + alarme UNIQUEMENT pour difficulté "Impossible" ===
         if ("Impossible".equalsIgnoreCase(currentDifficulty)) {
+            counterTextView.setVisibility(View.VISIBLE);
+
+            // réinit timer
+            timeLeft = 10;
+            counterTextView.setText(timeLeft + "s");
+
+            // cacher icônes/texte après 3s (ton ancien comportement)
             int amber = android.graphics.Color.parseColor("#FFC107");
             choice1.setTextColor(amber);
             choice2.setTextColor(amber);
@@ -182,39 +200,40 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 choice2.setClickable(true);
                 choice3.setClickable(true);
             }, 3000);
+
+            // Timer 1s
+            timerRunnable = new Runnable() {
+                @Override public void run() {
+                    if (hasAnswered) return;
+
+                    if (timeLeft <= 5 && !alarmActive) {
+                        startAlarm();
+                    }
+
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        counterTextView.setText(timeLeft + "s");
+                        timerHandler.postDelayed(this, 1000);
+                    } else {
+                        // Temps écoulé → mauvaise réponse + stop alarme
+                        stopAlarm();
+                        hasAnswered = true;
+                        checkAnswer();
+                    }
+                }
+            };
+            timerHandler.postDelayed(timerRunnable, 1000);
+        } else {
+            // Pas de timer/alarme pour les autres difficultés
+            counterTextView.setVisibility(View.GONE);
         }
-
-        // Timer 1s
-        timerRunnable = new Runnable() {
-            @Override public void run() {
-                if (hasAnswered) return;
-
-                if (timeLeft <= 5 && !alarmActive) {
-                    startAlarm();
-                }
-
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    counterTextView.setText(timeLeft + "s");
-                    timerHandler.postDelayed(this, 1000);
-                } else {
-                    // Temps écoulé → mauvaise réponse + stop alarme
-                    stopAlarm();
-                    hasAnswered = true;
-                    checkAnswer();
-                }
-            }
-        };
-        timerHandler.postDelayed(timerRunnable, 1000);
     }
 
     // Vérifie la réponse et passe à la question suivante
     private void checkAnswer() {
-        hasAnswered = true;           // bloque le timer
-        stopAlarm();                  // coupe l’alarme si active
-        if (timerRunnable != null) {
-            timerHandler.removeCallbacks(timerRunnable);
-        }
+        hasAnswered = true;
+        stopAlarm();
+        if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
 
         String[] q = questions.get(currentQuestionIndex);
         if (selectedAnswer.equals(q[4])) {

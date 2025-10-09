@@ -44,9 +44,9 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton aboutButton = findViewById(R.id.aboutButton);
         ImageButton questionButton = findViewById(R.id.questionButton);
 
-        // Hover + touch scale pour about/question
         setupHoverScale(aboutButton, 1.2f);
         setupHoverScale(questionButton, 1.2f);
+        setupHoverScale(playButton, 1.2f);
 
         // AboutActivity
         aboutButton.setOnClickListener(v ->
@@ -57,7 +57,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(this, DifficultChoiceActivity.class)));
 
     }
-
 
     @Override
     protected void onPause() {
