@@ -36,12 +36,18 @@ public class ScoreActivity extends AppCompatActivity {
         String difficulty = intent.getStringExtra("difficulty");
         int goodAnswers = intent.getIntExtra("goodAnswers", 0);
 
-        int totalQuestions = Question.getQuestions(difficulty).size();
-        float percentage = ((float) goodAnswers / totalQuestions) * 100f;
+        int totalQuestions = 0;
+        if (difficulty != null) {
+            totalQuestions = Question.getQuestions(difficulty).size();
+        }
+        int percentageInt = 0;
+        if (totalQuestions > 0) {
+            percentageInt = Math.round(((float) goodAnswers / totalQuestions) * 100f);
+        }
 
         DifficultyText.setText(difficulty);
         TextScore.setText( goodAnswers + "/" + totalQuestions);
-        PercentageText.setText(Math.round(percentage) + "%");
+        PercentageText.setText(percentageInt + "%");
 
         Button homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(view -> {
