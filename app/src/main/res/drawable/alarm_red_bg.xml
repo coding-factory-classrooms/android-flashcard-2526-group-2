@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <!-- Rouge ~40% d’opacité -->
+    <solid android:color="#66FF0000"/>
+</shape>
