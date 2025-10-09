@@ -205,9 +205,6 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     }
 
 
-
-
-
     /* ====== TextToSpeech ====== */
 
     @Override

@@ -12,6 +12,7 @@
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#56050505"
         android:fontFamily="@font/simpsonfont"
         android:text="Votre score"
         android:textColor="#FFCE3B"
@@ -24,10 +25,10 @@
 
     <ImageButton
         android:id="@+id/homeButton"
-        android:layout_width="90dp"
-        android:layout_height="82dp"
+        android:layout_width="157dp"
+        android:layout_height="77dp"
         android:background="@null"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         android:text="Home"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,12 +37,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975"
-        app:srcCompat="@drawable/home_icon" />
+        app:srcCompat="@drawable/acceuil_image" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#49040303"
         android:fontFamily="@font/simpsonfont"
         android:text="Difficulte  :"
         android:textColor="#FFCE3B"
@@ -57,8 +59,9 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#49040303"
         android:fontFamily="@font/simpsonfont"
-        android:text="Bonnes réponses  :"
+        android:text="Bonnes reponses  :"
         android:textColor="#FFCE3B"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,16 +114,16 @@
 
     <ImageButton
         android:id="@+id/shareButton"
-        android:layout_width="90dp"
-        android:layout_height="82dp"
+        android:layout_width="157dp"
+        android:layout_height="77dp"
         android:background="@null"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975"
-        app:srcCompat="@drawable/share_button_icon" />
+        app:srcCompat="@drawable/partager_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
