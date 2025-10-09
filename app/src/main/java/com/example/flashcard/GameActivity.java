@@ -40,6 +40,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private List<String[]> questions;
     private int currentQuestionIndex = 0;
     private String selectedAnswer = "";
+<<<<<<< HEAD
     private int goodAnswers = 0;
 
     private String currentDifficulty;
@@ -48,6 +49,9 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private boolean ttsReady = false;
 
     private int answerCounter;
+=======
+    private float goodAnswer = 0f;
+>>>>>>> origin/game_question
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,9 +179,13 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         String[] q = questions.get(currentQuestionIndex);
         if (selectedAnswer.equals(q[4])) {
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
             goodAnswers +=1;
             AudioKit.playLongOnce(this, R.raw.woohoo_sound);
             answerCounter = 0;
+=======
+            goodAnswer += 1f;
+>>>>>>> origin/game_question
         } else {
             Toast.makeText(this, "Mauvaise réponse ! La bonne réponse était : " + q[4], Toast.LENGTH_LONG).show();
             AudioKit.playLongOnce(this, R.raw.ohpinaise_sound);
@@ -191,8 +199,12 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 showQuestion(currentQuestionIndex);
             } else {
                 Intent intent = new Intent(this, ScoreActivity.class);
+<<<<<<< HEAD
                 intent.putExtra("goodAnswers", goodAnswers);
                 intent.putExtra("difficulty", currentDifficulty);
+=======
+                intent.putExtra("Bonne réponse", goodAnswer);
+>>>>>>> origin/game_question
                 startActivity(intent);
                 finish();
             }
