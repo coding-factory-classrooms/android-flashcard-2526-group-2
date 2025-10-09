@@ -166,6 +166,44 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         selectedAnswer = "";
         indexTextView.setText("Question " + (index + 1) + " / " + questions.size());
 
+
+        if ("Impossible".equalsIgnoreCase(currentDifficulty)) {
+
+            int amber = android.graphics.Color.parseColor("#FFC107");
+
+            choice1.setTextColor(amber);
+            choice2.setTextColor(amber);
+            choice3.setTextColor(amber);
+
+            soundQuestionButton1.setVisibility(ImageButton.VISIBLE);
+            soundQuestionButton2.setVisibility(ImageButton.VISIBLE);
+            soundQuestionButton3.setVisibility(ImageButton.VISIBLE);
+
+            choice1.setAlpha(1f);
+            choice2.setAlpha(1f);
+            choice3.setAlpha(1f);
+            soundQuestionButton1.setAlpha(1f);
+            soundQuestionButton2.setAlpha(1f);
+            soundQuestionButton3.setAlpha(1f);
+
+            //cache texte et icon
+            new Handler().postDelayed(() -> {
+
+                choice1.setTextColor(getResources().getColor(android.R.color.transparent));
+                choice2.setTextColor(getResources().getColor(android.R.color.transparent));
+                choice3.setTextColor(getResources().getColor(android.R.color.transparent));
+
+                soundQuestionButton1.setVisibility(ImageButton.INVISIBLE);
+                soundQuestionButton2.setVisibility(ImageButton.INVISIBLE);
+                soundQuestionButton3.setVisibility(ImageButton.INVISIBLE);
+
+                //laisse les bouton cliquable
+                choice1.setClickable(true);
+                choice2.setClickable(true);
+                choice3.setClickable(true);
+            }, 3000);//delais ici 3 sec
+        }
+
         // Optionnel : lire automatiquement l’énoncé
         // speak(q[0]);
     }
