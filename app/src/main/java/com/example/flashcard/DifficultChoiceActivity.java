@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import com.example.flashcard.HomeActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,11 +57,14 @@ public class DifficultChoiceActivity extends AppCompatActivity {
                 Toast.makeText(this, "Choisis une difficulté.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            animeScaleOnclickButton(easyImageButton);AudioKit.playSfx(this, R.raw.woohoo_sound);
+            animeScaleOnclickButton(easyImageButton);AudioKit.playSfx(this, R.raw.croc_sound);
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra("difficulty", difficulty);
             startActivity(intent);
         });
+
+
+        HomeActivity.setupHoverScale(validateImageButton, 1.2f);
     }
 
     private void selectDifficulty(String level) {

@@ -11,6 +11,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.flashcard.AudioKit;
+import com.example.flashcard.HomeActivity;
+
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,6 +60,8 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         AudioKit.startBgm(this, R.raw.horror_theme_sound, false); // true pour jouer en bloucle
         AudioKit.setBgmVolume(0.2f, 0.2f);
 
+
+
         // --- TTS natif ---
         tts = new TextToSpeech(this, this);
 
@@ -75,6 +80,8 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         soundQuestionButton3 = findViewById(R.id.soundQuestionButton3);
 
         answerCounter = 0;
+
+        setupHoverScale(validateButton, 1.2f);
 
         // --- Actions boutons son (KISS) ---
         soundImageButton.setOnClickListener(v ->
@@ -136,7 +143,6 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             }
         });
 
-        setupHoverScale(validateButton, 1.2f);
 
     }
 
@@ -243,23 +249,33 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         AudioKit.releaseAll();
         tts.stop();
     }
-    private void setupHoverScale(ImageButton btn, float scaleUp) {
-        final float baseX = btn.getScaleX();
-        final float baseY = btn.getScaleY();
 
+    public static void setupHoverScale(ImageButton btn, float scaleUp) {
+        final float baseX = 1f, baseY = 1f;
+        final long dur = 120;
+
+        Runnable up   = () -> btn.animate().scaleX(baseX * scaleUp).scaleY(baseY * scaleUp).setDuration(dur).start();
+        Runnable down = () -> btn.animate().scaleX(baseX).scaleY(baseY).setDuration(dur).start();
+
+        // Survol (souris/stylet)
         btn.setOnHoverListener((v, e) -> {
             switch (e.getActionMasked()) {
-                case MotionEvent.ACTION_HOVER_ENTER:
-                    v.setScaleX(baseX * scaleUp);
-                    v.setScaleY(baseY * scaleUp);
-                    break;
-                case MotionEvent.ACTION_HOVER_EXIT:
-                    v.setScaleX(baseX);
-                    v.setScaleY(baseY);
-                    break;
+                case MotionEvent.ACTION_HOVER_ENTER: up.run(); return true;
+                case MotionEvent.ACTION_HOVER_EXIT:  down.run(); return true;
             }
-            return false; // laisse passer l’événement aux autres handlers
+            return false;
+        });
+
+        // Press / Release (tactile)
+        btn.setOnTouchListener((v, e) -> {
+            switch (e.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:  up.run(); break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL: down.run(); break;
+            }
+            return false; // laisse le onClick
         });
     }
+
 
 }

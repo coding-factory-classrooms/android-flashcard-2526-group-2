@@ -93,8 +93,8 @@
 
     <ImageButton
         android:id="@+id/validateImageButton"
-        android:layout_width="176dp"
-        android:layout_height="105dp"
+        android:layout_width="284dp"
+        android:layout_height="177dp"
         android:background="@android:color/transparent"
         android:backgroundTint="#00DBC2C2"
         android:scaleType="fitCenter"

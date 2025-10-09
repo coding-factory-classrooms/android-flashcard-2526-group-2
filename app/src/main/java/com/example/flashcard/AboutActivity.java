@@ -8,6 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.flashcard.AudioKit;
+import com.example.flashcard.HomeActivity;
 
 public class AboutActivity extends AppCompatActivity {
 
