@@ -44,11 +44,11 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         scaleEasyButtonX = easyImageButton.getScaleX();
         scaleEasyButtonY = easyImageButton.getScaleY();
 
-        easyImageButton.setOnClickListener(v -> { selectDifficulty("facile");    animeScaleOnclickButton(easyImageButton); });
-        mediumImageButton.setOnClickListener(v -> { selectDifficulty("moyen");   animeScaleOnclickButton(mediumImageButton); });
-        difficileImageButton.setOnClickListener(v -> { selectDifficulty("difficile"); animeScaleOnclickButton(difficileImageButton); });
-        hardcoreImageButton.setOnClickListener(v -> { selectDifficulty("hardcore");   animeScaleOnclickButton(hardcoreImageButton); });
-        impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleOnclickButton(impossibleImageButton); });
+        easyImageButton.setOnClickListener(v -> { selectDifficulty("facile");    animeScaleOnclickButton(easyImageButton);AudioKit.playSfx(this, R.raw.c_nul_homer);});
+        mediumImageButton.setOnClickListener(v -> { selectDifficulty("moyen");   animeScaleOnclickButton(mediumImageButton);AudioKit.playSfx(this, R.raw.homer_haha);});
+        difficileImageButton.setOnClickListener(v -> { selectDifficulty("difficile"); animeScaleOnclickButton(difficileImageButton);AudioKit.playSfx(this, R.raw.hmmm_sound);});
+        hardcoreImageButton.setOnClickListener(v -> { selectDifficulty("hardcore");   animeScaleOnclickButton(hardcoreImageButton);AudioKit.playLongOnce(this, R.raw.homer_hou); });
+        impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleOnclickButton(impossibleImageButton); AudioKit.playSfx(this, R.raw.pas_baratin_sound); });
 
 
         validateImageButton.setOnClickListener(v -> {
@@ -56,6 +56,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
                 Toast.makeText(this, "Choisis une difficulté.", Toast.LENGTH_SHORT).show();
                 return;
             }
+            animeScaleOnclickButton(easyImageButton);AudioKit.playSfx(this, R.raw.woohoo_sound);
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra("difficulty", difficulty);
             startActivity(intent);
