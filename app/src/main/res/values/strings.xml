@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Flashcard</string>
+    <string name="a_propos">A propos</string>
+    <string name="chef">Scrum Master</string>
+    <string name="PE">Puerto Enrique</string>
+    <string name="D1">Developpeur 1</string>
+    <string name="AA">AGBA Ariela</string>
+    <string name="D2">Developpeur 2</string>
+    <string name="LT">LEPILLET Theo</string>
+    <string name="D3">Developpeur 3</string>
+    <string name="FN">FARRAG Nidal</string>
+    <string name="back">Retour</string>
+    <string name="ver">Version : </string>
 </resources>

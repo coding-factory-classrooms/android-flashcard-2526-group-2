@@ -1,5 +1,7 @@
 package com.example.flashcard;
 
+import com.example.flashcard.AudioKit;
+import com.example.flashcard.HomeActivity;
 import android.media.MediaPlayer;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,7 +31,7 @@ public class AboutActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        textVersion.setText("Version " + versionName);
+        textVersion.setText("Version : " + versionName);
 
         // Version du contour en noir
         TextView textVerOutline = findViewById(R.id.textView_ver_outline);
@@ -41,35 +43,18 @@ public class AboutActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        textVerOutline.setText("Version " + versionName);
+        textVerOutline.setText("Version : " + versionName);
+
 
         // --- Bouton retour ---
         ImageButton buttonBack = findViewById(R.id.button_back);
+
+        // Hover du bouton retour
+        HomeActivity.setupHoverScale(buttonBack, 1.2f);
+
         buttonBack.setOnClickListener(v -> {
             // Ferme simplement cette activité pour revenir à la précédente
             finish();
-
-            TextView LT = findViewById(R.id.textView5);
-            TextView AA = findViewById(R.id.textView3);
-            TextView FN = findViewById(R.id.textView9);
-
-            // Un son pour chaque
-            MediaPlayer soundLT = MediaPlayer.create(this, R.raw.nelson_haha);
-            MediaPlayer soundAA = MediaPlayer.create(this, R.raw.nelson_haha);
-            MediaPlayer soundFN = MediaPlayer.create(this, R.raw.nelson_haha);
-
-            LT.setOnClickListener(v1 -> {
-                soundLT.start();
-            });
-
-            AA.setOnClickListener(v2 -> {
-                soundAA.start();
-            });
-
-            FN.setOnClickListener(v3 -> {
-                soundFN.start();
-            });
-
         });
     }
 }
