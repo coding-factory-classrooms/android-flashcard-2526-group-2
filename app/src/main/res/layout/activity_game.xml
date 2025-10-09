@@ -160,9 +160,9 @@
 
     <ImageButton
         android:id="@+id/gameValidButton"
-        android:layout_width="292dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="244dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="56dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
