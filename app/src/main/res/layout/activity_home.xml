@@ -58,12 +58,12 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="412dp"
-        android:layout_height="218dp"
+        android:layout_width="407dp"
+        android:layout_height="230dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/home_title"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="-2dp" />
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
