@@ -30,6 +30,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         validateImageButton   = findViewById(R.id.validateImageButton);
 
         AudioKit.startBgm(this, R.raw.alien_sound_theme, true);
+        AudioKit.setBgmVolume(0.1f,0.1f);
 
         titleImageButton= findViewById(R.id.titleImageButton);
         titleImageButton.setOnClickListener(v -> AudioKit.playLongOnce(this, R.raw.donuts_sucre_au_sucre_sound));
@@ -42,11 +43,12 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         mediumImageButton.setOnClickListener(v -> { selectDifficulty("moyen");   animeScaleOnclickButton(mediumImageButton);AudioKit.playSfx(this, R.raw.homer_haha);});
         difficileImageButton.setOnClickListener(v -> { selectDifficulty("difficile"); animeScaleOnclickButton(difficileImageButton);AudioKit.playSfx(this, R.raw.hmmm_sound);});
         hardcoreImageButton.setOnClickListener(v -> { selectDifficulty("hardcore");   animeScaleOnclickButton(hardcoreImageButton);AudioKit.playLongOnce(this, R.raw.homer_hou); });
-        impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleOnclickButton(impossibleImageButton); AudioKit.playSfx(this, R.raw.pas_baratin_sound); });
+        impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleOnclickButton(impossibleImageButton); AudioKit.playSfx(this, R.raw.marge_toi_alors_sound); });
 
 
         validateImageButton.setOnClickListener(v -> {
             if (difficulty == null) {
+                AudioKit.playSfx(this, R.raw.pas_baratin_sound);
                 Toast.makeText(this, "Choisis une difficulté.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -77,7 +79,6 @@ public class DifficultChoiceActivity extends AppCompatActivity {
 
         holdSelectedButton = button;
     }
-
 
     @Override
     protected void onPause() {
