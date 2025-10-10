@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class QuestionListActivity extends AppCompatActivity {
 
     private ListView listViewQuestions;
@@ -49,5 +50,21 @@ public class QuestionListActivity extends AppCompatActivity {
             intent.putExtra("correctAnswer", selectedQuestion[1]);
             startActivity(intent);
         });
+
+        AudioKit.startBgm(this, R.raw.question_list_theme, true);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AudioKit.releaseAll();
+        boolean tts;
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AudioKit.releaseAll();
+        boolean tts;
+    }
+
 }

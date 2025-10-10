@@ -361,6 +361,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         tts.speak(toSay, TextToSpeech.QUEUE_ADD, null, UUID.randomUUID().toString());
     }
 
+
     private static String getTextOrEmpty(TextView tv) {
         CharSequence cs = tv.getText();
         return cs == null ? "" : cs.toString();

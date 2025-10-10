@@ -62,4 +62,17 @@ public class AboutActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AudioKit.releaseAll();
+        boolean tts;
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AudioKit.releaseAll();
+        boolean tts;
+    }
 }

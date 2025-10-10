@@ -74,5 +74,7 @@ public class ScoreActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(shareIntent, "Partager via"));
         });
 
+        AudioKit.startBgm(this, R.raw.score_theme, true);
+
     }
 }
