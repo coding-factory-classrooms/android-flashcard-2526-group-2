@@ -40,4 +40,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(group = "com.squareup.okhttp", name = "okhttp", version = "2.7.5")
 }
