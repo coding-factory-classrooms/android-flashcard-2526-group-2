@@ -273,6 +273,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 intent.putExtra("goodAnswers", goodAnswers);
                 intent.putExtra("difficulty", currentDifficulty);
                 intent.putExtra("Bonne réponse", goodAnswer);
+                intent.putExtra("totalQuestions", questions.size());
                 startActivity(intent);
                 finish();
             }
