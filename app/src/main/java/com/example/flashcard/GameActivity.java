@@ -306,7 +306,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
     }
 
-    //vérifieréponse et passe à la question suivante
+    //vérifier éponse et passe à la question suivante
     private void checkAnswer() {
         hasAnswered = true;
         stopAlarm();
@@ -343,7 +343,8 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }, 500);
     }
 
-    /* ====== TextToSpeech ====== */
+
+    // initialisation tts (text to speach) en FR etc
     @Override public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             int res = tts.setLanguage(Locale.FRANCE);
@@ -359,6 +360,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
     }
 
+    // permet de parler le texte en commentaire
     private void speak(String text) {
         if (!ttsReady || text == null) return;
         String toSay = text.trim();
@@ -372,6 +374,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         return cs == null ? "" : cs.toString();
     }
 
+    // quand on ferme l'appli
     @Override protected void onDestroy() {
         super.onDestroy();
         if (tts != null) {
@@ -380,6 +383,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
     }
 
+    // quand on quitte l'appli
     @Override protected void onPause() {
         super.onPause();
         AudioKit.releaseAll();
