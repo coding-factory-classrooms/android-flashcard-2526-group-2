@@ -29,6 +29,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         impossibleImageButton = findViewById(R.id.impossibleImageButton);
         validateImageButton   = findViewById(R.id.validateImageButton);
 
+        // bgm
         AudioKit.startBgm(this, R.raw.alien_theme, true);
         AudioKit.setBgmVolume(0.2f, 0.2f);
 
@@ -36,9 +37,12 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         titleImageButton.setOnClickListener(v -> AudioKit.playLongOnce(this, R.raw.donuts_sucre_au_sucre_sound));
 
 
+        // taille btn de base
         scaleEasyButtonX = easyImageButton.getScaleX();
         scaleEasyButtonY = easyImageButton.getScaleY();
 
+
+        // clic btn
         easyImageButton.setOnClickListener(v -> { selectDifficulty("facile");    animeScaleOnclickButton(easyImageButton);AudioKit.playSfx(this, R.raw.c_nul_homer);});
         mediumImageButton.setOnClickListener(v -> { selectDifficulty("moyen");   animeScaleOnclickButton(mediumImageButton);AudioKit.playSfx(this, R.raw.homer_haha);});
         difficileImageButton.setOnClickListener(v -> { selectDifficulty("difficile"); animeScaleOnclickButton(difficileImageButton);AudioKit.playSfx(this, R.raw.hmmm_sound);});
@@ -46,6 +50,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         impossibleImageButton.setOnClickListener(v -> { selectDifficulty("impossible"); animeScaleOnclickButton(impossibleImageButton); AudioKit.playSfx(this, R.raw.marge_toi_alors_sound); });
 
 
+        // clic btn validation
         validateImageButton.setOnClickListener(v -> {
             if (difficulty == null) {
                 AudioKit.playSfx(this, R.raw.pas_baratin_sound);
@@ -63,10 +68,12 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         HomeActivity.setupHoverScale(validateImageButton, 1.2f);
     }
 
+    // permet d'enregistrer la difficulté du jeu
     private void selectDifficulty(String level) {
         difficulty = level;
     }
 
+    // anim quand je clic
     private void animeScaleOnclickButton(ImageButton button) {
         if (holdSelectedButton == button) return;
 
