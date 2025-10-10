@@ -48,6 +48,10 @@ public class HomeActivity extends AppCompatActivity {
         setupHoverScale(questionButton, 1.2f);
         setupHoverScale(playButton, 1.2f);
 
+        // Question List
+        questionButton.setOnClickListener(v ->
+                startActivity(new Intent(HomeActivity.this, QuestionListActivity.class)));
+
         // AboutActivity
         aboutButton.setOnClickListener(v ->
                 startActivity(new Intent(HomeActivity.this, AboutActivity.class)));

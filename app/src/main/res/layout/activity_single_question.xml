@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SingleQuestionActivity">
+
+    <ImageView
+        android:id="@+id/backgroundDifficultyImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/backgound3" />
+
+    <ImageButton
+        android:id="@+id/titleImageButton"
+        android:layout_width="408dp"
+        android:layout_height="215dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/choose_title" />
+
+    <TextView
+        android:id="@+id/gameTextView"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#211A1818"
+        android:fontFamily="@font/simpsonfont"
+        android:text="Question ici"
+        android:textColor="#FFC107"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/titleImageButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <!-- Mégaphone qui lit la question (déjà présent chez toi) -->
+    <ImageButton
+        android:id="@+id/soundImageButton"
+        android:layout_width="36dp"
+        android:layout_height="37dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/gameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/gameTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gameTextView"
+        app:srcCompat="@drawable/sound_image" />
+
+    <!-- RadioGroup des choix -->
+    <RadioGroup
+        android:id="@+id/choicesRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/gameTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RadioButton
+            android:id="@+id/gameButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="#211A1818"
+            android:fontFamily="@font/simpsonfont"
+            android:text="Choix 1"
+            android:textColor="#FFC107"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/gameButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="#211A1818"
+            android:fontFamily="@font/simpsonfont"
+            android:text="Choix 2"
+            android:textColor="#FFC107"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/gameButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="#211A1818"
+            android:fontFamily="@font/simpsonfont"
+            android:text="Choix 3"
+            android:textColor="#FFC107"
+            android:textSize="18sp" />
+    </RadioGroup>
+
+    <!-- Positionnement : à gauche du RadioGroup, alignés verticalement via marginTop -->
+    <ImageButton
+        android:id="@+id/soundQuestionButton1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="45dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Lire choix 1"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/choicesRadioGroup"
+        app:layout_constraintTop_toTopOf="@+id/choicesRadioGroup"
+        app:srcCompat="@drawable/sound_image" />
+
+    <ImageButton
+        android:id="@+id/soundQuestionButton2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="130dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Lire choix 2"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/choicesRadioGroup"
+        app:layout_constraintTop_toTopOf="@+id/choicesRadioGroup"
+        app:srcCompat="@drawable/sound_image" />
+
+    <ImageButton
+        android:id="@+id/soundQuestionButton3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="220dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Lire choix 3"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/choicesRadioGroup"
+        app:layout_constraintTop_toTopOf="@+id/choicesRadioGroup"
+        app:srcCompat="@drawable/sound_image" />
+
+    <!-- Bouton valider -->
+    <ImageButton
+        android:id="@+id/gameValidButton"
+        android:layout_width="244dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/choicesRadioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/validate_question_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
