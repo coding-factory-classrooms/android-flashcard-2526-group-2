@@ -7,6 +7,18 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="10dp">
 
+    <ImageButton
+        android:id="@+id/btnSpeak"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Lire la question"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sound_image"
+        app:layout_constraintBottom_toBottomOf="@id/tvQuestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvQuestion" />
+
     <TextView
         android:id="@+id/tvQuestion"
         android:layout_width="0dp"
@@ -19,17 +31,5 @@
         app:layout_constraintEnd_toStartOf="@+id/btnSpeak"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnSpeak"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="Lire la question"
-        android:scaleType="centerCrop"
-        android:src="@drawable/sound_image"
-        app:layout_constraintBottom_toBottomOf="@id/tvQuestion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvQuestion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
