@@ -166,50 +166,63 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private void loadQuestionsFromApi() {
         OkHttpClient client = new OkHttpClient();
 
+        // requette GET
         Request request = new Request.Builder()
                 .url("https://students.gryt.tech/api/L2/quizgamesimpson/")
                 .build();
 
+        // Savoir dans le log que la requette marche
         Log.i("GameActivity", "Started HTTP Request");
 
+        // Exécution de la requette sans bloquer l'ui
         client.newCall(request).enqueue(new Callback() {
             @Override
+            // message d'erreur au cas où ça marche pas
             public void onFailure(Request request, IOException e) {
                 Log.e("GameActivity", "OnFailure: ", e);
             }
 
             @Override
             public void onResponse(Response response) throws IOException {
+                // mettre le body response HTTP en str
                 String body = response.body().string();
                 Log.i("GameActivity", "onResponse: body=" + body);
 
                 try {
+                    // mettre le str en json
                     JSONObject jsonObject = new JSONObject(body);
                     String difficulty = currentDifficulty;
 
-                    List<String[]> listFromApi = new java.util.ArrayList<>();
+                    // liste avec le contenu du Json
+                    List<String[]> Questions = new java.util.ArrayList<>();
 
+                    // recup le tableau qui correspond à la difficulté qu'on choisit
                     org.json.JSONArray arr = jsonObject.getJSONArray(difficulty);
 
+                    // Parcours chaque clé question dans le tableau
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject q = arr.getJSONObject(i);
                         String question = q.getString("question");
+                        // recup les options
                         org.json.JSONArray opts = q.getJSONArray("options");
                         String rep1 = opts.getString(0);
                         String rep2 = opts.getString(1);
                         String rep3 = opts.getString(2);
+                        // recup la bonne réponse
                         String bonnerep = q.getString("answer");
-                        listFromApi.add(new String[]{question, rep1, rep2, rep3, bonnerep});
+                        // add dans la liste Question
+                        Questions.add(new String[]{question, rep1, rep2, rep3, bonnerep});
                     }
 
+                    // Mettre à jour l'interface
                     runOnUiThread(() -> {
-                        questions = listFromApi;
+                        questions = Questions;
                         Collections.shuffle(questions);
-                        currentQuestionIndex = 0;
                         showQuestion(currentQuestionIndex);
                     });
 
                 } catch (JSONException e) {
+                    // en cas d'erreur de parsing json
                     Log.e("GameActivity", "Erreur JSON", e);
                 }
             }
