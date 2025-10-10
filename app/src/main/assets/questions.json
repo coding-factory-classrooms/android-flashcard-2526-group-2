@@ -1,0 +1,516 @@
+{
+  "facile": [
+    {
+      "question": "Comment s'appelle le père de la famille Simpson ?",
+      "options": ["Homer", "Bart", "Ned"],
+      "answer": "Homer"
+    },
+    {
+      "question": "Quel est le prénom de la mère ?",
+      "options": ["Marge", "Mona", "Selma"],
+      "answer": "Marge"
+    },
+    {
+      "question": "Quel est le prénom du fils aîné ?",
+      "options": ["Bart", "Milhouse", "Ralph"],
+      "answer": "Bart"
+    },
+    {
+      "question": "Comment s'appelle la petite dernière ?",
+      "options": ["Maggie", "Lisa", "Janey"],
+      "answer": "Maggie"
+    },
+    {
+      "question": "Qui joue du saxophone ?",
+      "options": ["Lisa", "Bart", "Marge"],
+      "answer": "Lisa"
+    },
+    {
+      "question": "Qui tient le bar emblématique de Springfield ?",
+      "options": ["Moe", "Apu", "Barney"],
+      "answer": "Moe"
+    },
+    {
+      "question": "Quelle bière Homer préfère-t-il ?",
+      "options": ["Duff", "Fudd", "Buzz Cola"],
+      "answer": "Duff"
+    },
+    {
+      "question": "Où travaille Homer ?",
+      "options": ["Centrale nucléaire", "École élémentaire", "Mairie"],
+      "answer": "Centrale nucléaire"
+    },
+    {
+      "question": "Quel voisin dit souvent « Okily-dokily » ?",
+      "options": ["Ned Flanders", "Chief Wiggum", "Skinner"],
+      "answer": "Ned Flanders"
+    },
+    {
+      "question": "Comment s’appelle le clown célèbre ?",
+      "options": ["Krusty", "Sideshow Bob", "Troy McClure"],
+      "answer": "Krusty"
+    },
+    {
+      "question": "Quel est le prénom de la sœur intelligente de Bart ?",
+      "options": ["Lisa", "Maggie", "Ling"],
+      "answer": "Lisa"
+    },
+    {
+      "question": "Le magasin d’Apu s’appelle…",
+      "options": ["Kwik-E-Mart", "Try-N-Save", "Leftorium"],
+      "answer": "Kwik-E-Mart"
+    },
+    {
+      "question": "Le chat le plus souvent présent chez les Simpson est…",
+      "options": ["Snowball II", "Snowball I", "Scratchy"],
+      "answer": "Snowball II"
+    },
+    {
+      "question": "Le chien des Simpson s’appelle…",
+      "options": ["Petit Papa Noël (Santa's Little Helper)", "Poochie", "Laddie"],
+      "answer": "Petit Papa Noël (Santa's Little Helper)"
+    },
+    {
+      "question": "Qui est le proviseur de l’école ?",
+      "options": ["Seymour Skinner", "Edna Krapabelle", "Chalmers"],
+      "answer": "Seymour Skinner"
+    },
+    {
+      "question": "Qui est le présentateur du journal TV ?",
+      "options": ["Kent Brockman", "Arnie Pye", "Birch Barlow"],
+      "answer": "Kent Brockman"
+    },
+    {
+      "question": "La ville où vivent les Simpson s’appelle…",
+      "options": ["Springfield", "Shelbyville", "Ogdenville"],
+      "answer": "Springfield"
+    },
+    {
+      "question": "Le supermarché « gauchers » est tenu par…",
+      "options": ["Ned Flanders", "Apu", "Gil"],
+      "answer": "Ned Flanders"
+    },
+    {
+      "question": "Qui est le meilleur ami de Bart ?",
+      "options": ["Milhouse", "Nelson", "Ralph"],
+      "answer": "Milhouse"
+    },
+    {
+      "question": "Quelle boisson gazeuse parodie-t-on souvent ?",
+      "options": ["Buzz Cola", "Slurm", "Squishee"],
+      "answer": "Buzz Cola"
+    }
+  ],
+
+  "moyen": [
+    {
+      "question": "Quel est le nom complet de Milhouse ?",
+      "options": ["Milhouse Van Houten", "Milhouse Jones", "Milhouse Burns"],
+      "answer": "Milhouse Van Houten"
+    },
+    {
+      "question": "Quel est le prénom du chef de la police ?",
+      "options": ["Clancy", "Lou", "Eddie"],
+      "answer": "Clancy"
+    },
+    {
+      "question": "Comment s'appelle la mère de Milhouse ?",
+      "options": ["Luann", "Helen", "Edna"],
+      "answer": "Luann"
+    },
+    {
+      "question": "Quel est le nom du grand-père Simpson ?",
+      "options": ["Abraham", "Herb", "Clancy"],
+      "answer": "Abraham"
+    },
+    {
+      "question": "Quel est le prénom du frère d'Homer ?",
+      "options": ["Herb", "Clancy", "Larry"],
+      "answer": "Herb"
+    },
+    {
+      "question": "Qui est l’ennemi juré de Bart ?",
+      "options": ["Sideshow Bob", "Nelson", "Jimbo"],
+      "answer": "Sideshow Bob"
+    },
+    {
+      "question": "Quel est le nom de jeune fille de Marge ?",
+      "options": ["Bouvier", "Muntz", "Wiggum"],
+      "answer": "Bouvier"
+    },
+    {
+      "question": "Qui est le principal rival de Mr. Burns ?",
+      "options": ["Arthur Fortune", "Rich Texan", "Sideshow Mel"],
+      "answer": "Arthur Fortune"
+    },
+    {
+      "question": "Qui travaille avec Homer à la centrale nucléaire ?",
+      "options": ["Lenny et Carl", "Moe et Barney", "Smithers et Burns"],
+      "answer": "Lenny et Carl"
+    },
+    {
+      "question": "Quel est le prénom du directeur adjoint de l’école ?",
+      "options": ["Chalmers", "Edna", "Ralph"],
+      "answer": "Chalmers"
+    },
+    {
+      "question": "Comment s’appelle la sœur jumelle de Patty ?",
+      "options": ["Selma", "Marge", "Jackie"],
+      "answer": "Selma"
+    },
+    {
+      "question": "Quelle est la couleur naturelle des cheveux de Marge ?",
+      "options": ["Gris", "Bleu", "Blond"],
+      "answer": "Gris"
+    },
+    {
+      "question": "Quel personnage adore les donuts ?",
+      "options": ["Homer", "Chief Wiggum", "Barney"],
+      "answer": "Homer"
+    },
+    {
+      "question": "Quel est le nom du bus scolaire ?",
+      "options": ["Otto", "Martin", "Nelson"],
+      "answer": "Otto"
+    },
+    {
+      "question": "Quel métier exerce le père de Milhouse ?",
+      "options": ["Travail à l’usine", "Aucun (chômeur)", "Employé de bureau"],
+      "answer": "Employé de bureau"
+    },
+    {
+      "question": "Qui est le professeur de Bart ?",
+      "options": ["Mme Krapabelle", "Mme Hoover", "Mme Skinner"],
+      "answer": "Mme Krapabelle"
+    },
+    {
+      "question": "Qui est le surintendant du district scolaire ?",
+      "options": ["Chalmers", "Skinner", "Lovejoy"],
+      "answer": "Chalmers"
+    },
+    {
+      "question": "Quel est le prénom du fils du chef Wiggum ?",
+      "options": ["Ralph", "Lou", "Eddie"],
+      "answer": "Ralph"
+    },
+    {
+      "question": "Comment s'appelle le clown ennemi de Sideshow Bob ?",
+      "options": ["Krusty", "Homer", "Skinner"],
+      "answer": "Krusty"
+    },
+    {
+      "question": "Quel est le plat préféré d'Homer ?",
+      "options": ["Donuts", "Pizza", "Côtes de porc"],
+      "answer": "Donuts"
+    }
+  ],
+
+  "difficile": [
+    {
+      "question": "Quel est le deuxième prénom d’Homer révélé tardivement ?",
+      "options": ["Jay", "Joe", "Jon"],
+      "answer": "Jay"
+    },
+    {
+      "question": "Le véritable nom de famille de Comic Book Guy est…",
+      "options": ["Jeff Albertson", "Jeff Albright", "Jeff Harrison"],
+      "answer": "Jeff Albertson"
+    },
+    {
+      "question": "Le vrai nom de Sideshow Bob est…",
+      "options": ["Robert Terwilliger", "Robert Wigum", "Robert McBain"],
+      "answer": "Robert Terwilliger"
+    },
+    {
+      "question": "Le groupe d’Homer qui chante « Baby on Board » est…",
+      "options": ["The Be Sharps", "The D’oh Notes", "The Dufftones"],
+      "answer": "The Be Sharps"
+    },
+    {
+      "question": "Le chef cuisinier français caricatural apparaît comme…",
+      "options": ["Chef Français (gag récurrent)", "César", "Anton Ego"],
+      "answer": "Chef Français (gag récurrent)"
+    },
+    {
+      "question": "Le prénom de la femme de Ned décédée est…",
+      "options": ["Maude", "Mona", "Mary"],
+      "answer": "Maude"
+    },
+    {
+      "question": "L’entrepreneur excentrique de Globex Corp. est…",
+      "options": ["Hank Scorpio", "Arthur Fortune", "Rich Texan"],
+      "answer": "Hank Scorpio"
+    },
+    {
+      "question": "Le duo ‘Itchy & Scratchy’ est produit parfois par…",
+      "options": ["Krusty Studios", "Duff Studios", "KBBL"],
+      "answer": "Krusty Studios"
+    },
+    {
+      "question": "Le jazzman mentor de Lisa est…",
+      "options": ["Bleeding Gums Murphy", "Murphy Jazz", "Bleeding Gum"],
+      "answer": "Bleeding Gums Murphy"
+    },
+    {
+      "question": "Le supérieur de Skinner est…",
+      "options": ["Chalmers", "Hoover", "Largo"],
+      "answer": "Chalmers"
+    },
+    {
+      "question": "Le scientifique loufoque à lunettes est…",
+      "options": ["Professeur Frink", "Dr. Nick", "Dr. Colossus"],
+      "answer": "Professeur Frink"
+    },
+    {
+      "question": "La mascotte géante de donuts s’appelle…",
+      "options": ["Lard Lad", "Duff Lad", "Donut Boy"],
+      "answer": "Lard Lad"
+    },
+    {
+      "question": "L’épisode parodie les sociétés secrètes via…",
+      "options": ["Stonecutters", "Freemasons", "Illuminati"],
+      "answer": "Stonecutters"
+    },
+    {
+      "question": "Le voisin millionnaire au gros rire est…",
+      "options": ["Rich Texan", "Arthur Fortune", "Wolfcastle"],
+      "answer": "Rich Texan"
+    },
+    {
+      "question": "Le nom de scène de Rainier Wolfcastle est associé à…",
+      "options": ["McBain", "McPain", "Hardcastle"],
+      "answer": "McBain"
+    },
+    {
+      "question": "Le prénom de la fille d’Apu est (un exemple parmi la fratrie)…",
+      "options": ["Priti", "Maya", "Anu"],
+      "answer": "Priti"
+    },
+    {
+      "question": "Le nom de la ligne ferroviaire bidon promue par Lyle Lanley…",
+      "options": ["Monorail", "Hyperloop", "FastRail"],
+      "answer": "Monorail"
+    },
+    {
+      "question": "Le présentateur avocat gaffeur qui disparaît est…",
+      "options": ["Lionel Hutz", "Blue Haired Lawyer", "Gil Gunderson"],
+      "answer": "Lionel Hutz"
+    },
+    {
+      "question": "La ville voisine et rivale principale est…",
+      "options": ["Shelbyville", "North Haverbrook", "Capital City"],
+      "answer": "Shelbyville"
+    },
+    {
+      "question": "Le patronyme de Marge est partagé avec ses sœurs :",
+      "options": ["Bouvier", "Bouyer", "Bouvet"],
+      "answer": "Bouvier"
+    }
+  ],
+
+  "hardcore": [
+    {
+      "question": "Nom complet (version la plus citée) de Krusty le Clown :",
+      "options": ["Herschel Krustofski", "Herschel Shmoikel Krustofski", "Hyman Krustofski"],
+      "answer": "Herschel Krustofski"
+    },
+    {
+      "question": "Le vrai nom du proviseur révélé dans un épisode :",
+      "options": ["Armin Tamzarian", "Seymour Tamzarian", "Armin Terwilliger"],
+      "answer": "Armin Tamzarian"
+    },
+    {
+      "question": "Le nom de l’usine où travaille Homer :",
+      "options": ["Centrale de Springfield", "Centrale de Shelbyville", "Nuclear Town"],
+      "answer": "Centrale de Springfield"
+    },
+    {
+      "question": "Le nom du talk-show de Krusty quand il se « réinvente » :",
+      "options": ["Krusty Komedy Klassic", "Krusty Comeback", "Krusty Live"],
+      "answer": "Krusty Komedy Klassic"
+    },
+    {
+      "question": "Le prénom du père de Milhouse :",
+      "options": ["Kirk", "Kirkland", "Kip"],
+      "answer": "Kirk"
+    },
+    {
+      "question": "Le prénom de la mère de Milhouse :",
+      "options": ["Luann", "Luanne", "Luan"],
+      "answer": "Luann"
+    },
+    {
+      "question": "Le nom du super-héros local parodié incarné en film :",
+      "options": ["Radioactive Man", "Fallout Man", "Nuclear Man"],
+      "answer": "Radioactive Man"
+    },
+    {
+      "question": "Le nom de l’acolyte de Radioactive Man :",
+      "options": ["Fallout Boy", "Sidekick Boy", "Atom Kid"],
+      "answer": "Fallout Boy"
+    },
+    {
+      "question": "La boutique pour gauchers de Flanders :",
+      "options": ["Leftorium", "LeftPlace", "LeftyShop"],
+      "answer": "Leftorium"
+    },
+    {
+      "question": "Le prénom du professeur de musique de l’école :",
+      "options": ["Dewey Largo", "Largo Dewey", "Larry Dew"],
+      "answer": "Dewey Largo"
+    },
+    {
+      "question": "Le consultant juridique aux cheveux bleus :",
+      "options": ["Blue Haired Lawyer", "Lionel Hutz", "Gil Gunderson"],
+      "answer": "Blue Haired Lawyer"
+    },
+    {
+      "question": "L’investisseur milliardaire sympathique rencontré par Homer :",
+      "options": ["Arthur Fortune", "Rich Texan", "Hank Scorpio"],
+      "answer": "Arthur Fortune"
+    },
+    {
+      "question": "Le médecin à l’accent ‘Hi everybody!’ :",
+      "options": ["Dr. Nick Riviera", "Dr. Hibbert", "Dr. Wolfe"],
+      "answer": "Dr. Nick Riviera"
+    },
+    {
+      "question": "Le présentateur radio conservateur de Springfield :",
+      "options": ["Birch Barlow", "Kent Brockman", "Arnie Pye"],
+      "answer": "Birch Barlow"
+    },
+    {
+      "question": "Le nom du propriétaire de la station KBBL :",
+      "options": ["KBBL", "KABL", "KLBL"],
+      "answer": "KBBL"
+    },
+    {
+      "question": "La devise secrète chantée des Stonecutters (« We Do ») fait référence à :",
+      "options": ["Stonecutters", "Be Sharps", "Monorailers"],
+      "answer": "Stonecutters"
+    },
+    {
+      "question": "Le nom du vendeur malchanceux qui foire tout :",
+      "options": ["Gil Gunderson", "Old Gil", "Gilly Anderson"],
+      "answer": "Gil Gunderson"
+    },
+    {
+      "question": "La ville vantée par le charlatan du Monorail :",
+      "options": ["North Haverbrook", "Ogdenville", "Shelbyville"],
+      "answer": "North Haverbrook"
+    },
+    {
+      "question": "Le nom de l’acteur parodiant Schwarzenegger :",
+      "options": ["Rainier Wolfcastle", "McBain Wolf", "Rainer Castle"],
+      "answer": "Rainier Wolfcastle"
+    },
+    {
+      "question": "Le prénom de la fille de Flanders qui apparaît dans certains médias dérivés :",
+      "options": ["Aucune fille canon", "Maude Jr.", "Nancy"],
+      "answer": "Aucune fille canon"
+    }
+  ],
+  "impossible": [
+    {
+      "question": "Nom « officiel » le plus long attribué à Krusty :",
+      "options": ["Herschel Shmoikel Pinchas Yerucham Krustofski", "Herschel Shmoikel Krustofski", "Hyman Herschel Krustofski"],
+      "answer": "Herschel Shmoikel Pinchas Yerucham Krustofski"
+    },
+    {
+      "question": "Le nom du journal local :",
+      "options": ["Springfield Shopper", "Springfield Times", "Springfield Tribune"],
+      "answer": "Springfield Shopper"
+    },
+    {
+      "question": "Le propriétaire de la boutique de BD :",
+      "options": ["Comic Book Guy (Jeff Albertson)", "Jefferson Comics", "Guy the Comic"],
+      "answer": "Comic Book Guy (Jeff Albertson)"
+    },
+    {
+      "question": "La boisson givrée du Kwik-E-Mart :",
+      "options": ["Squishee", "Slushee", "Squishy"],
+      "answer": "Squishee"
+    },
+    {
+      "question": "La ville rivale ‘jumelle’ de Springfield :",
+      "options": ["Shelbyville", "Capital City", "Cypress Creek"],
+      "answer": "Shelbyville"
+    },
+    {
+      "question": "Le ‘patron’ de Smithers :",
+      "options": ["M. Burns", "M. Scorpio", "M. Teeny"],
+      "answer": "M. Burns"
+    },
+    {
+      "question": "Le groupe d’Homer dans l’épisode barbershop :",
+      "options": ["The Be Sharps", "The Sharp Be", "Barbertones"],
+      "answer": "The Be Sharps"
+    },
+    {
+      "question": "Le pseudo du vendeur de BD :",
+      "options": ["Comic Book Guy", "CBG", "Jeff"],
+      "answer": "Comic Book Guy"
+    },
+    {
+      "question": "Le prénom du présentateur juridique glacial :",
+      "options": ["— (souvent sans prénom)", "James", "Robert"],
+      "answer": "— (souvent sans prénom)"
+    },
+    {
+      "question": "La station TV locale est :",
+      "options": ["Channel 6", "Channel 7", "KBBL-TV"],
+      "answer": "Channel 6"
+    },
+    {
+      "question": "La bande rivale d’ados dont Jimbo fait partie :",
+      "options": ["Les gros durs du lycée (générique)", "The Bullies", "The Tough Boys"],
+      "answer": "Les gros durs du lycée (générique)"
+    },
+    {
+      "question": "La marque du donut géant :",
+      "options": ["Lard Lad Donuts", "Duff Donuts", "Mega Donut"],
+      "answer": "Lard Lad Donuts"
+    },
+    {
+      "question": "Le pseudo du critique culinaire véhément :",
+      "options": ["The Food Critic (var. Freddy Quimby gag)", "Monty Critic", "Judge Food"],
+      "answer": "The Food Critic (var. Freddy Quimby gag)"
+    },
+    {
+      "question": "Le prénom du maire Quimby :",
+      "options": ["Joe", "Bob", "Dan"],
+      "answer": "Joe"
+    },
+    {
+      "question": "Le vrai nom de ‘Sideshow Mel’ :",
+      "options": ["Melvin Van Horne", "Melvin Horne", "Melvin Terwilliger"],
+      "answer": "Melvin Van Horne"
+    },
+    {
+      "question": "Le nom de la ville ‘idéale’ où Homer travaille pour Scorpio :",
+      "options": ["Cypress Creek", "Shelbyville Heights", "North Haverbrook"],
+      "answer": "Cypress Creek"
+    },
+    {
+      "question": "Le nom complet de Patty/Selma (famille) :",
+      "options": ["Patty et Selma Bouvier", "Patty et Selma Smith", "Patty et Selma Hoover"],
+      "answer": "Patty et Selma Bouvier"
+    },
+    {
+      "question": "Le prénom du fils de Ned plus pieux :",
+      "options": ["Rod", "Todd", "Rob"],
+      "answer": "Rod"
+    },
+    {
+      "question": "Le prénom du fils de Ned plus jeune :",
+      "options": ["Todd", "Ted", "Tom"],
+      "answer": "Todd"
+    },
+    {
+      "question": "L’entrepreneur du Monorail :",
+      "options": ["Lyle Lanley", "Lionel Hutz", "Lyle Langley (var.)"],
+      "answer": "Lyle Lanley"
+    }
+  ]
+}
+

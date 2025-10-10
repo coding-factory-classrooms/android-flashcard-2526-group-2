@@ -29,8 +29,8 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         impossibleImageButton = findViewById(R.id.impossibleImageButton);
         validateImageButton   = findViewById(R.id.validateImageButton);
 
-        AudioKit.startBgm(this, R.raw.alien_sound_theme, true);
-        AudioKit.setBgmVolume(0.1f,0.1f);
+        AudioKit.startBgm(this, R.raw.alien_theme, true);
+        AudioKit.setBgmVolume(0.2f, 0.2f);
 
         titleImageButton= findViewById(R.id.titleImageButton);
         titleImageButton.setOnClickListener(v -> AudioKit.playLongOnce(this, R.raw.donuts_sucre_au_sucre_sound));
@@ -55,6 +55,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
             animeScaleOnclickButton(easyImageButton);AudioKit.playSfx(this, R.raw.croc_sound);
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra("difficulty", difficulty);
+            difficulty = null;
             startActivity(intent);
         });
 
@@ -79,6 +80,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
 
         holdSelectedButton = button;
     }
+
 
     @Override
     protected void onPause() {

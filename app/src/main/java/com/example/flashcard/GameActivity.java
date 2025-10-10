@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -13,7 +14,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -38,9 +47,6 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private int goodAnswers = 0;
     private String currentDifficulty;
 
-    // Mode “une seule question”
-    private boolean singleMode = false;
-
     // TTS
     private TextToSpeech tts;
     private boolean ttsReady = false;
@@ -52,7 +58,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private boolean hasAnswered = false;
     private boolean alarmActive = false;
 
-    // Compteur de clics sur les choix (au-delà de 3 → joue un SFX)
+    // Compteur de clics sur les choix
     private int clickCountChoices = 0;
 
     @Override
@@ -116,36 +122,18 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         choice2.setOnClickListener(choicesClickCounter);
         choice3.setOnClickListener(choicesClickCounter);
 
-        // ===== Mode “une seule question” depuis la liste =====
+        // Init questions
         Intent intent = getIntent();
-        singleMode = intent.getBooleanExtra("single_mode", false);
-        if (singleMode) {
-            String q   = intent.getStringExtra("q_text");
-            String c0  = intent.getStringExtra("q_c0");
-            String c1  = intent.getStringExtra("q_c1");
-            String c2  = intent.getStringExtra("q_c2");
-            String ans = intent.getStringExtra("q_answer");
-            currentDifficulty = intent.getStringExtra("difficulty");
-            if (currentDifficulty == null) currentDifficulty = "Test";
-
-            difficultyTextView.setText(currentDifficulty);
-            counterTextView.setVisibility(View.GONE); // pas de timer
-            alarmRedOverlay.setVisibility(View.GONE);
-            alarmBeam.setVisibility(View.GONE);
-
-            questions = new ArrayList<>();
-            questions.add(new String[]{ q, c0, c1, c2, ans });
-            showQuestion(0);
-            return; // ne pas charger la banque complète
-        }
-
-        // ===== Mode normal : chargement depuis JSON par difficulté =====
         currentDifficulty = intent.getStringExtra("difficulty");
         difficultyTextView.setText(currentDifficulty != null ? currentDifficulty : "Aucune difficulté");
 
-        questions = QuestionsJSON.getQuestions(this, currentDifficulty);
+        // Charge et mélange les questions locales (fallback)
+        questions = Question.getQuestions(currentDifficulty);
         Collections.shuffle(questions);
         showQuestion(currentQuestionIndex);
+
+        // Optionnel : tente de charger depuis l'API pour mettre à jour le pool de questions
+        loadQuestionsFromApi();
     }
 
     /** Démarre l’alarme (visuel + son) */
@@ -171,11 +159,69 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         alarmRedOverlay.setVisibility(View.GONE);
         alarmBeam.setVisibility(View.GONE);
         AudioKit.stopBgm();
+        // Ne pas recharger ici les questions (cela causait des boucles et effets de bord)
+    }
+
+    // Charge les données de l'API (asynchrone, remplace la liste si succès)
+    private void loadQuestionsFromApi() {
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url("https://students.gryt.tech/api/L2/quizgamesimpson/")
+                .build();
+
+        Log.i("GameActivity", "Started HTTP Request");
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.e("GameActivity", "OnFailure: ", e);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String body = response.body().string();
+                Log.i("GameActivity", "onResponse: body=" + body);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(body);
+                    String difficulty = currentDifficulty;
+
+                    List<String[]> listFromApi = new java.util.ArrayList<>();
+
+                    org.json.JSONArray arr = jsonObject.getJSONArray(difficulty);
+
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject q = arr.getJSONObject(i);
+                        String question = q.getString("question");
+                        org.json.JSONArray opts = q.getJSONArray("options");
+                        String rep1 = opts.getString(0);
+                        String rep2 = opts.getString(1);
+                        String rep3 = opts.getString(2);
+                        String bonnerep = q.getString("answer");
+                        listFromApi.add(new String[]{question, rep1, rep2, rep3, bonnerep});
+                    }
+
+                    runOnUiThread(() -> {
+                        questions = listFromApi;
+                        Collections.shuffle(questions);
+                        currentQuestionIndex = 0;
+                        showQuestion(currentQuestionIndex);
+                    });
+
+                } catch (JSONException e) {
+                    Log.e("GameActivity", "Erreur JSON", e);
+                }
+            }
+        });
     }
 
     // Affiche la question et (re)lance le timer uniquement pour "Impossible"
     private void showQuestion(int index) {
-        if (questions == null || questions.isEmpty() || index < 0 || index >= questions.size()) return;
+        if (questions == null || questions.isEmpty() || index < 0 || index >= questions.size()) {
+            Toast.makeText(this, "Aucune question disponible.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String[] q = questions.get(index);
         String[] choices = { q[1], q[2], q[3] };
@@ -200,12 +246,6 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         stopAlarm();
         if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
 
-        // Pas de timer/alarme en mode “une seule question”
-        if (singleMode) {
-            counterTextView.setVisibility(View.GONE);
-            return;
-        }
-
         // === Timer + alarme UNIQUEMENT pour difficulté "Impossible" ===
         if ("Impossible".equalsIgnoreCase(currentDifficulty)) {
             counterTextView.setVisibility(View.VISIBLE);
@@ -214,22 +254,23 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             timeLeft = 10;
             counterTextView.setText(timeLeft + "s");
 
-            // cacher icônes/texte après 3s (ton ancien comportement)
+            // style initial avant masquage
             int amber = android.graphics.Color.parseColor("#FFC107");
             choice1.setTextColor(amber);
             choice2.setTextColor(amber);
             choice3.setTextColor(amber);
-            soundQuestionButton1.setVisibility(ImageButton.VISIBLE);
-            soundQuestionButton2.setVisibility(ImageButton.VISIBLE);
-            soundQuestionButton3.setVisibility(ImageButton.VISIBLE);
+            soundQuestionButton1.setVisibility(View.VISIBLE);
+            soundQuestionButton2.setVisibility(View.VISIBLE);
+            soundQuestionButton3.setVisibility(View.VISIBLE);
 
+            // après 3s, on masque le texte et les icônes
             choice1.postDelayed(() -> {
                 choice1.setTextColor(getResources().getColor(android.R.color.transparent));
                 choice2.setTextColor(getResources().getColor(android.R.color.transparent));
                 choice3.setTextColor(getResources().getColor(android.R.color.transparent));
-                soundQuestionButton1.setVisibility(ImageButton.INVISIBLE);
-                soundQuestionButton2.setVisibility(ImageButton.INVISIBLE);
-                soundQuestionButton3.setVisibility(ImageButton.INVISIBLE);
+                soundQuestionButton1.setVisibility(View.INVISIBLE);
+                soundQuestionButton2.setVisibility(View.INVISIBLE);
+                soundQuestionButton3.setVisibility(View.INVISIBLE);
                 choice1.setClickable(true);
                 choice2.setClickable(true);
                 choice3.setClickable(true);
@@ -270,7 +311,9 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
 
         String[] q = questions.get(currentQuestionIndex);
-        if (selectedAnswer.equals(q[4])) {
+        boolean isCorrect = selectedAnswer.equals(q[4]);
+
+        if (isCorrect) {
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
             goodAnswers += 1;
             AudioKit.playLongOnce(this, R.raw.woohoo_sound);
@@ -280,12 +323,6 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
 
         new Handler().postDelayed(() -> {
-            // En mode “une seule question”, on ferme l’activité après la réponse
-            if (singleMode) {
-                finish();
-                return;
-            }
-
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.size()) {
                 showQuestion(currentQuestionIndex);
@@ -293,6 +330,8 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 Intent intent = new Intent(this, ScoreActivity.class);
                 intent.putExtra("goodAnswers", goodAnswers);
                 intent.putExtra("difficulty", currentDifficulty);
+                intent.putExtra("correctAnswer", q[4]); // envoie la dernière bonne réponse
+                intent.putExtra("totalQuestions", questions.size());
                 startActivity(intent);
                 finish();
             }
@@ -321,6 +360,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         if (toSay.isEmpty()) return;
         tts.speak(toSay, TextToSpeech.QUEUE_ADD, null, UUID.randomUUID().toString());
     }
+
 
     private static String getTextOrEmpty(TextView tv) {
         CharSequence cs = tv.getText();

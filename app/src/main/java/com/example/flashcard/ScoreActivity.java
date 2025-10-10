@@ -27,33 +27,32 @@ public class ScoreActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Link with the ids
+        // Lien avec les xml
         TextView DifficultyText = findViewById(R.id.DifficultyText);
         TextView TextScore = findViewById(R.id.TextScore);
         TextView PercentageText = findViewById(R.id.PercentageText);
 
-        // Link with GameActivity
+        // Recup les données de GameActivity
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra("difficulty");
         int goodAnswers = intent.getIntExtra("goodAnswers", 0);
+        int totalQuestions = intent.getIntExtra("totalQuestions", 0);
 
-        int totalQuestions;
-        if (difficulty != null) {
-            totalQuestions = Question.getQuestions(difficulty).size();
-        } else {
-            totalQuestions = 0;
-        }
+        // Calcul le pourcentage de réussite
         int percentageInt;
         if (totalQuestions > 0) {
+            // Arrondit le nombre
             percentageInt = Math.round(((float) goodAnswers / totalQuestions) * 100f);
         } else {
             percentageInt = 0;
         }
 
+        // Affichage dans le xml les infos
         DifficultyText.setText(difficulty);
         TextScore.setText( goodAnswers + "/" + totalQuestions);
         PercentageText.setText(percentageInt + "%");
 
+        // Bouton retour à l'acceuil
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(view -> {
             Intent HomeIntent = new Intent(this,HomeActivity.class);
@@ -63,38 +62,19 @@ public class ScoreActivity extends AppCompatActivity {
 
         ImageButton shareButton = findViewById(R.id.shareButton);
         shareButton.setOnClickListener(view -> {
-
             String shareText = "J'ai eu " + goodAnswers + "/" + totalQuestions +
                     " avec un score de : " + percentageInt + " % " + "en "+ difficulty ;
 
-            // action share
+            // Crée une intent de partage
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
 
-            //  share menu
+            //  menu de partage
             startActivity(Intent.createChooser(shareIntent, "Partager via"));
         });
 
-        if (percentageInt <= 20){
-            AudioKit.playSfx(this, R.raw.c_nul_homer);
-        } else if (percentageInt <= 50) {
-
-            AudioKit.playSfx(this, R.raw.nelson_haha);
-
-        }else if (percentageInt <= 70) {
-
-            AudioKit.playSfx(this, R.raw.homer_haha);
-
-        }else if (percentageInt <= 95) {
-
-            AudioKit.playSfx(this, R.raw.woohoo_sound);
-
-        }else if (percentageInt <= 100) {
-
-            AudioKit.playSfx(this, R.raw.excellent_burns);
-
-        }
+        AudioKit.startBgm(this, R.raw.score_theme, true);
 
     }
 }
