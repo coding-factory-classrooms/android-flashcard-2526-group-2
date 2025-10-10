@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -12,11 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.flashcard.AudioKit;
 import com.example.flashcard.HomeActivity;
-
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -110,9 +118,9 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         difficultyTextView.setText(currentDifficulty != null ? currentDifficulty : "Aucune difficulté");
 
         // Charge et mélange les questions
-        questions = Question.getQuestions(currentDifficulty);
-        Collections.shuffle(questions);
-        showQuestion(currentQuestionIndex);
+       // questions = Question.getQuestions(currentDifficulty);
+//        Collections.shuffle(questions);
+//        showQuestion(currentQuestionIndex);
 
         validateButton.setOnClickListener(v -> checkAnswer());
 
@@ -145,7 +153,74 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             }
         });
 
+        loadQuestionsFromApi();
+    }
 
+    // Charge les données de l'API
+    private void loadQuestionsFromApi() {
+        OkHttpClient client = new OkHttpClient();
+
+        // requette GET
+        Request request = new Request.Builder()
+                .url("https://students.gryt.tech/api/L2/quizgamesimpson/")
+                .build();
+
+        // Savoir dans le log que la requette marche
+        Log.i("GameActivity", "Started HTTP Request");
+
+        // Exécution de la requette sans bloquer l'ui
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            // message d'erreur au cas où ça marche pas
+            public void onFailure(Request request, IOException e) {
+                Log.e("GameActivity", "OnFailure: ", e);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                // mettre le body response HTTP en str
+                String body = response.body().string();
+                Log.i("GameActivity", "onResponse: body=" + body);
+
+                try {
+                    // mettre le str en json
+                    JSONObject jsonObject = new JSONObject(body);
+                    String difficulty = currentDifficulty;
+
+                    // liste avec le contenu du Json
+                    List<String[]> Questions = new java.util.ArrayList<>();
+
+                    // recup le tableau qui correspond à la difficulté qu'on choisit
+                    org.json.JSONArray arr = jsonObject.getJSONArray(difficulty);
+
+                    // Parcours chaque clé question dans le tableau
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject q = arr.getJSONObject(i);
+                        String question = q.getString("question");
+                        // recup les options
+                        org.json.JSONArray opts = q.getJSONArray("options");
+                        String rep1 = opts.getString(0);
+                        String rep2 = opts.getString(1);
+                        String rep3 = opts.getString(2);
+                        // recup la bonne réponse
+                        String bonnerep = q.getString("answer");
+                        // add dans la liste Question
+                        Questions.add(new String[]{question, rep1, rep2, rep3, bonnerep});
+                    }
+
+                    // Mettre à jour l'interface
+                    runOnUiThread(() -> {
+                        questions = Questions;
+                        Collections.shuffle(questions);
+                        showQuestion(currentQuestionIndex);
+                    });
+
+                } catch (JSONException e) {
+                    // en cas d'erreur de parsing json
+                    Log.e("GameActivity", "Erreur JSON", e);
+                }
+            }
+        });
     }
 
     // Affiche la question et remet l'état des choix
