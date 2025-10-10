@@ -216,13 +216,14 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         });
     }
 
-    // Affiche la question et (re)lance le timer uniquement pour "Impossible"
+    //affiche question
     private void showQuestion(int index) {
         if (questions == null || questions.isEmpty() || index < 0 || index >= questions.size()) {
             Toast.makeText(this, "Aucune question disponible.", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        //recupere les questions et les propositions et rends aleaotire
         String[] q = questions.get(index);
         String[] choices = { q[1], q[2], q[3] };
         List<String> shuffled = java.util.Arrays.asList(choices);
@@ -233,28 +234,28 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         choice2.setText(shuffled.get(1));
         choice3.setText(shuffled.get(2));
 
+        //montre le nombre de uestion restante
         indexTextView.setText("Question " + (index + 1) + " / " + questions.size());
         choicesRadioGroup.clearCheck();
         validateButton.setEnabled(false);
         selectedAnswer = "";
         hasAnswered = false;
 
-        // reset compteur de clics sur les choix
+        //compteur pour les choix
         clickCountChoices = 0;
 
-        // Stoppe toute alarme/timer résiduels
         stopAlarm();
         if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
 
-        // === Timer + alarme UNIQUEMENT pour difficulté "Impossible" ===
+        //seulement si mode impossible + specificity
         if ("Impossible".equalsIgnoreCase(currentDifficulty)) {
             counterTextView.setVisibility(View.VISIBLE);
 
-            // réinit timer
+            //timer
             timeLeft = 10;
             counterTextView.setText(timeLeft + "s");
 
-            // style initial avant masquage
+            //choix et bouton visible avec couleur jaune de base
             int amber = android.graphics.Color.parseColor("#FFC107");
             choice1.setTextColor(amber);
             choice2.setTextColor(amber);
@@ -263,7 +264,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             soundQuestionButton2.setVisibility(View.VISIBLE);
             soundQuestionButton3.setVisibility(View.VISIBLE);
 
-            // après 3s, on masque le texte et les icônes
+            //cache au bout de 3sec
             choice1.postDelayed(() -> {
                 choice1.setTextColor(getResources().getColor(android.R.color.transparent));
                 choice2.setTextColor(getResources().getColor(android.R.color.transparent));
@@ -276,11 +277,12 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 choice3.setClickable(true);
             }, 3000);
 
-            // Timer 1s
+            //timer
             timerRunnable = new Runnable() {
                 @Override public void run() {
                     if (hasAnswered) return;
 
+                    //si moins de 5 sec, lance alarm
                     if (timeLeft <= 5 && !alarmActive) {
                         startAlarm();
                     }
@@ -290,7 +292,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                         counterTextView.setText(timeLeft + "s");
                         timerHandler.postDelayed(this, 1000);
                     } else {
-                        // Temps écoulé → mauvaise réponse + stop alarme
+                        //stop alarme et compte faux si pas de reponse
                         stopAlarm();
                         hasAnswered = true;
                         checkAnswer();
@@ -299,20 +301,22 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             };
             timerHandler.postDelayed(timerRunnable, 1000);
         } else {
-            // Pas de timer/alarme pour les autres difficultés
+            //pas de timer pour les autres modes
             counterTextView.setVisibility(View.GONE);
         }
     }
 
-    // Vérifie la réponse et passe à la question suivante
+    //vérifieréponse et passe à la question suivante
     private void checkAnswer() {
         hasAnswered = true;
         stopAlarm();
         if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
 
+        //recuperere la  question actuel et la bonne reponse
         String[] q = questions.get(currentQuestionIndex);
         boolean isCorrect = selectedAnswer.equals(q[4]);
 
+        //message de victoire et defaite
         if (isCorrect) {
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
             goodAnswers += 1;
@@ -322,6 +326,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
             AudioKit.playLongOnce(this, R.raw.ohpinaise_sound);
         }
 
+        //verifie si il reste des questions et passe a la suivante sinon renvoie score
         new Handler().postDelayed(() -> {
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.size()) {
@@ -330,7 +335,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 Intent intent = new Intent(this, ScoreActivity.class);
                 intent.putExtra("goodAnswers", goodAnswers);
                 intent.putExtra("difficulty", currentDifficulty);
-                intent.putExtra("correctAnswer", q[4]); // envoie la dernière bonne réponse
+                intent.putExtra("correctAnswer", q[4]);
                 intent.putExtra("totalQuestions", questions.size());
                 startActivity(intent);
                 finish();
