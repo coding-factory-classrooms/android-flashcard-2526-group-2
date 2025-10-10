@@ -29,14 +29,7 @@ public class DifficultChoiceActivity extends AppCompatActivity {
         impossibleImageButton = findViewById(R.id.impossibleImageButton);
         validateImageButton   = findViewById(R.id.validateImageButton);
 
-        // Précharger les sfx, (conseillé)
-        AudioKit.preloadSfx(this, R.raw.hmmm_sound);
-        AudioKit.preloadSfx(this, R.raw.marge_toi_alors_sound);
-        AudioKit.preloadSfx(this, R.raw.ohpinaise_sound);
-        AudioKit.preloadSfx(this, R.raw.pas_baratin_sound);
-        AudioKit.preloadSfx(this, R.raw.ta_gueule_sound);
-        AudioKit.preloadSfx(this, R.raw.woohoo_sound);
-        AudioKit.preloadSfx(this, R.raw.donuts_sucre_au_sucre_sound);
+        AudioKit.startBgm(this, R.raw.alien_sound_theme, true);
 
         titleImageButton= findViewById(R.id.titleImageButton);
         titleImageButton.setOnClickListener(v -> AudioKit.playLongOnce(this, R.raw.donuts_sucre_au_sucre_sound));

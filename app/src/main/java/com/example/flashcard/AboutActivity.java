@@ -59,7 +59,19 @@ public class AboutActivity extends AppCompatActivity {
             AudioKit.releaseAll();
             finish();
         });
+    }
+    @Override protected void onPause() {
+        super.onPause();
+        AudioKit.pauseBgm();      // au cas où tu veux reprendre si on revient
+    }
 
+    @Override protected void onStop() {
+        super.onStop();
+        AudioKit.stopBgm();       // garantit l’arrêt si on quitte l’écran
+    }
 
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        AudioKit.releaseAll();    // nettoie tout
     }
 }

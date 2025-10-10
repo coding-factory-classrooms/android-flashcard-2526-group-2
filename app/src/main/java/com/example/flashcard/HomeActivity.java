@@ -56,7 +56,12 @@ public class HomeActivity extends AppCompatActivity {
         playButton.setOnClickListener(v ->
                 startActivity(new Intent(this, DifficultChoiceActivity.class)));
 
+        // Go écran difficulté
+        questionButton.setOnClickListener(v ->
+                startActivity(new Intent(this, QuestionListActivity.class)));
+
     }
+
 
     @Override
     protected void onPause() {

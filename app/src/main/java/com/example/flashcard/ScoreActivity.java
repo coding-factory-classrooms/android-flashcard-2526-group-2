@@ -76,5 +76,25 @@ public class ScoreActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(shareIntent, "Partager via"));
         });
 
+        if (percentageInt <= 20){
+            AudioKit.playSfx(this, R.raw.c_nul_homer);
+        } else if (percentageInt <= 50) {
+
+            AudioKit.playSfx(this, R.raw.nelson_haha);
+
+        }else if (percentageInt <= 70) {
+
+            AudioKit.playSfx(this, R.raw.homer_haha);
+
+        }else if (percentageInt <= 95) {
+
+            AudioKit.playSfx(this, R.raw.woohoo_sound);
+
+        }else if (percentageInt <= 100) {
+
+            AudioKit.playSfx(this, R.raw.excellent_burns);
+
+        }
+
     }
 }

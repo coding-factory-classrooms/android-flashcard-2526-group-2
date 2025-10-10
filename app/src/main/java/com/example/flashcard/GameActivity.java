@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -37,6 +38,9 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private int goodAnswers = 0;
     private String currentDifficulty;
 
+    // Mode “une seule question”
+    private boolean singleMode = false;
+
     // TTS
     private TextToSpeech tts;
     private boolean ttsReady = false;
@@ -48,7 +52,7 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private boolean hasAnswered = false;
     private boolean alarmActive = false;
 
-    // Compteur de clics sur les choix
+    // Compteur de clics sur les choix (au-delà de 3 → joue un SFX)
     private int clickCountChoices = 0;
 
     @Override
@@ -112,12 +116,34 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         choice2.setOnClickListener(choicesClickCounter);
         choice3.setOnClickListener(choicesClickCounter);
 
-        // Init questions
+        // ===== Mode “une seule question” depuis la liste =====
         Intent intent = getIntent();
+        singleMode = intent.getBooleanExtra("single_mode", false);
+        if (singleMode) {
+            String q   = intent.getStringExtra("q_text");
+            String c0  = intent.getStringExtra("q_c0");
+            String c1  = intent.getStringExtra("q_c1");
+            String c2  = intent.getStringExtra("q_c2");
+            String ans = intent.getStringExtra("q_answer");
+            currentDifficulty = intent.getStringExtra("difficulty");
+            if (currentDifficulty == null) currentDifficulty = "Test";
+
+            difficultyTextView.setText(currentDifficulty);
+            counterTextView.setVisibility(View.GONE); // pas de timer
+            alarmRedOverlay.setVisibility(View.GONE);
+            alarmBeam.setVisibility(View.GONE);
+
+            questions = new ArrayList<>();
+            questions.add(new String[]{ q, c0, c1, c2, ans });
+            showQuestion(0);
+            return; // ne pas charger la banque complète
+        }
+
+        // ===== Mode normal : chargement depuis JSON par difficulté =====
         currentDifficulty = intent.getStringExtra("difficulty");
         difficultyTextView.setText(currentDifficulty != null ? currentDifficulty : "Aucune difficulté");
 
-        questions = Question.getQuestions(currentDifficulty);
+        questions = QuestionsJSON.getQuestions(this, currentDifficulty);
         Collections.shuffle(questions);
         showQuestion(currentQuestionIndex);
     }
@@ -149,6 +175,8 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     // Affiche la question et (re)lance le timer uniquement pour "Impossible"
     private void showQuestion(int index) {
+        if (questions == null || questions.isEmpty() || index < 0 || index >= questions.size()) return;
+
         String[] q = questions.get(index);
         String[] choices = { q[1], q[2], q[3] };
         List<String> shuffled = java.util.Arrays.asList(choices);
@@ -171,6 +199,12 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         // Stoppe toute alarme/timer résiduels
         stopAlarm();
         if (timerRunnable != null) timerHandler.removeCallbacks(timerRunnable);
+
+        // Pas de timer/alarme en mode “une seule question”
+        if (singleMode) {
+            counterTextView.setVisibility(View.GONE);
+            return;
+        }
 
         // === Timer + alarme UNIQUEMENT pour difficulté "Impossible" ===
         if ("Impossible".equalsIgnoreCase(currentDifficulty)) {
@@ -246,6 +280,12 @@ public class GameActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
 
         new Handler().postDelayed(() -> {
+            // En mode “une seule question”, on ferme l’activité après la réponse
+            if (singleMode) {
+                finish();
+                return;
+            }
+
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.size()) {
                 showQuestion(currentQuestionIndex);
